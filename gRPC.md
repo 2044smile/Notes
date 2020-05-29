@@ -21,7 +21,7 @@
 	* XML, json 등으로 들어온 요청 / 응답을 Protocol Buffer를 이용해 직렬화하여 더 작은 크기의 요청 / 응답으로 만들 수 있습니다.
 	* 기본적으로는 base128을 이요한 byte array 직렬화를 사용하지만, 사용방식에 따라 json, text 직렬화로 사용 가능합니다.
 		* ex) helloworld.proto 아래와 같이 스크립트를 만들어두고 python 의 경우 
-		`python -m grpc_tools.protoc -I. --python_out=.--grpc_python_out=. helloworld.proto` 명령을 입력하면 
+		`python -m grpc_tools.protoc -I. --python_out=.--grpc_python_out=. helloworld.proto` 명령을 입력하면 `helloworld_pb2.py`와 `helloworld_pb2_grpc.py` 가 생성됩니다.
 		``` 
 		syntax = "proto3";
 		package helloworld;
@@ -42,5 +42,5 @@
 ## Reference 
 * [https://widian.github.io/blog/2018/11/23/grdc-%EC%A0%95%EB%A6%AC.html](https://widian.github.io/blog/2018/11/23/grdc-%EC%A0%95%EB%A6%AC.html)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwODk4Mzg5ODFdfQ==
+eyJoaXN0b3J5IjpbODEwMjQ5MDY5XX0=
 -->
