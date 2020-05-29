@@ -16,10 +16,10 @@
 * ** HTTP/2를 이용한 reverse proxy 기능**
 	* 서버간에 HTTP 1.1 Keep-alive로 통신하고 있을 경우, 특정 요청이 holding 되면 다음 요청도 전부 holding되는 문제가 생길 수 있습니다.
 	* HTTP/2 reverse proxy를 통해 multiplex하게 서버와 요청을 주고 받을 수 있게 됩니다.
-		*  
+		* ex) 여러 모듈들을 multiplex 하게 트리거할 수 있음(?) 
 
 ## Reference 
 * [https://widian.github.io/blog/2018/11/23/grdc-%EC%A0%95%EB%A6%AC.html](https://widian.github.io/blog/2018/11/23/grdc-%EC%A0%95%EB%A6%AC.html)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzNzY2ODEwNjddfQ==
+eyJoaXN0b3J5IjpbMTc5OTA3OTY1NV19
 -->
