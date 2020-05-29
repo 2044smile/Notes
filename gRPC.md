@@ -5,10 +5,17 @@
 	* client side에서 요청을 gRPC 형태로 만들어주는 역할을 하는 컴포넌트의 이름입니다.
 	ex) `stub = helloworld_pb2_grpc.GreeterStub(channel)`
 
+## gRPC가 반드시 제공해야할 기능
+* Service not Objects, Messages not References
+* Streaming
+* Blocking & Non-Blocking
 
+## 장점
+* Low Latency, Highly scalable, distributed systems
+	* 
 
 ## Reference 
 * [https://widian.github.io/blog/2018/11/23/grdc-%EC%A0%95%EB%A6%AC.html](https://widian.github.io/blog/2018/11/23/grdc-%EC%A0%95%EB%A6%AC.html)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDAwODQ3NzAyXX0=
+eyJoaXN0b3J5IjpbODc5NTI5MTA3XX0=
 -->
