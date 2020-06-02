@@ -1,8 +1,3 @@
----
-
-
----
-
 <h2 id="grpc란">gRPC란</h2>
 <ul>
 <li>gRPC는 어떤 환경에서도 동작하는 모던한 오픈소스 원격 프로시저 요청 (Remote Procedure Call, RPC) 프레임워크입니다.</li>
@@ -12,7 +7,11 @@
 <li>client side에서 요청을 gRPC 형태로 만들어주는 역할을 하는 컴포넌트의 이름입니다.<br>
 ex) <code>stub = helloworld_pb2_grpc.GreeterStub(channel)</code></li>
 </ul>
-</li>
+<li>proto buf를 이용하여 gRPC가 지원하는 언어에 안에서는 서로 통신이 가능하다.</li>
+<li>HTML1.1 보다 2.0의 속도가 약 10배 이상 Amazing</li>
+<li>gRPC를 사용하게 되면 Restful HTTP의 규격이 필요가 없다.</li>
+<li>user_pb2.py -> Message 정의에 사용될 Class</li>
+<li>user_pb2_grpc.py -> Service 정의에 사용될 Class</li>
 </ul>
 <h2 id="grpc가-반드시-제공해야할-기능">gRPC가 반드시 제공해야할 기능</h2>
 <ul>
@@ -64,8 +63,21 @@ message HelloReply {
 </ul>
 </li>
 </ul>
+
+
+<h2>단점</h2>
+<ul>
+<li>엔드포인트의 추가와 파일 관리가 어렵다.</li>
+예를 들어 MSA로 구성된 서비스이고, 모든 엔드포인트를 하나의 gRPC에서 관리하고 있다.
+공통으로 사용하는 엔드포인트의 수정이 발생하였고, proto 파일을 생성하였고, pb2, pb2_grpc가 생성된다.
+생성 된 파일들을 모듈들에게 적용시켜줘야된다는 불편함이 생긴다.
+<li>Reference 에 있는 youtube를 보면 막바지에 그 불편함을 개선한 방법을 설명하니 자세한 설명이 필요하면 참고하면 됩니다.</li>
+
+</ul>
+
 <h2 id="reference">Reference</h2>
 <ul>
 <li><a href="https://widian.github.io/blog/2018/11/23/grdc-%EC%A0%95%EB%A6%AC.html">https://widian.github.io/blog/2018/11/23/grdc-%EC%A0%95%EB%A6%AC.html</a></li>
+<a href="">https://www.youtube.com/watch?v=KGAernd-42M</a>
 </ul>
 
