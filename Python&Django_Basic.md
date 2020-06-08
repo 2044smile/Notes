@@ -171,7 +171,35 @@ print(x)  # 20
 ```
 - 위 코드를 통해 알 수 있듯이, 바로 위에 해당하는 f 함수의 지역변수에만 영향을 주고, 전역 변수에는 영향을 주지 않는다.
 
+응용하면 아래의 코드와 같다.
+
+```python
+def outer_func(msg):
+    def inner_func():
+        inner_func.msg = msg
+        print(inner_func.msg)  # Helllllo
+        inner_func.msg = "Awsesome!!"
+        print(inner_func.msg)  # Awesome!!
+    
+    return inner_func
+
+first_func = outer_func("Helllllo")
+first_func()
+```
+
 [!] 함수 한 개를 정의하고 전역변수에 영향을 주게하는 것은 안된다. 무조건 중첩함수(Nested function)만 가능하다.
+
+> ### 왜 사용할까?
+> - 전역 변수의 사용을 피할 수 있음
+> - private 속성이 없는 파이썬에서 내부 데이터의 은닉을 할 수 있음
+> - 하나의 함수로 여러 가지의 함수를 간단히 만들어 낼 수 있도록 해줌
+> - 기존에 만들어진 함수나 모듈 등을 수정하지 않고도 wrapper 함수를 이용해 커스터마이징 할 수 있게 해줌
+>
+> ### 요약 
+> - 클로저란 내부 함수 영역에서 외부 함수 영역의 변수에 접근하는 것을 말함
+> - 파이썬에서 클로저가 구현 가능한 이유는 함수를 일급 객체로 취급하기 때문
+> - 클로저 내에서 외부 함수 영역 변수를 수정하기 위해서는 별도의 방법이 필요하다. (global, nonlocal)
+> - 데이터 은닉 등의 모적을 위해 사용
 
 # 오브젝트란?
 ## 객체지향(OOP) 프로그램
