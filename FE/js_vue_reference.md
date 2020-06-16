@@ -113,7 +113,7 @@ export defualt {
             todoList: []
         };
     },
-    conputed: {  // 값을 변경할 때 주로 사용한다.
+    conputed: {  // 값을 변경할 때 주로 사용한다. getter 함수처럼 동작한다.
         activeTodoList() {
             return this.todoList.filter(todo => todo.state === 'active')
         }
@@ -133,14 +133,20 @@ export defualt {
         }
     },
 }
-
+```
+- filter
+```javascript
 
 ```
 
 
 ## Reference
 
-- https://www.youtube.com/watch?v=BWb-_pvmwyU&list=PLwawSyI26pfuGsEzp7AzP_TJVhSdwFuwh&index=6
+- 레시피 Vue 강의
+  https://www.youtube.com/watch?v=BWb-_pvmwyU&list=PLwawSyI26pfuGsEzp7AzP_TJVhSdwFuwh&index=6
 - https://blog.metafor.kr/202
-- https://www.youtube.com/watch?v=wcsVjmHrUQg&list=PLv2d7VI9OotTVOL4QmPfvJWPJvkmv6h-2
+- 드림코딩
+  https://www.youtube.com/watch?v=wcsVjmHrUQg&list=PLv2d7VI9OotTVOL4QmPfvJWPJvkmv6h-2
 - https://kr.vuejs.org/v2/guide/index.html
+- 캡틴 판교님
+  - https://joshua1988.github.io/web-development/javascript/promise-for-beginners/
