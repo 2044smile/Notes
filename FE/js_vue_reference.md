@@ -99,10 +99,44 @@ Please pick a preset: default (babel, eslint)
 
 ## 명령
 
+- run server
 ```commandline
 npm run serve
 ```
- 
+- script ( vue code )
+```script
+export defualt { 
+    name: 'App' // App.vue
+    data() {  // v-model 에서 데이터를 가져오거나 할 때 사용하기에 적합하다.
+        return {
+            userInput: '',
+            todoList: []
+        };
+    },
+    conputed: {  // 값을 변경할 때 주로 사용한다.
+        activeTodoList() {
+            return this.todoList.filter(todo => todo.state === 'active')
+        }
+    },
+    methods: {
+    // 메소드라는 것은 단순히 값을 가져오기 보다는 메소드 호출 시 내부 값을 변경하거나
+    // axios 로 외부 값을 읽어 들이거나 내부 상태 값을 변경시키는데 사용된다.
+        addNewTodo() {
+            this.todoList.push({
+                label: this.userInput,
+                state: 'active'
+            });
+            this.userInput = '';
+        },
+        toggleTodoState(todo) {
+            todo.state = todo.state === 'active' ? 'done' : 'active'; // python의 삼항연산과 비슷
+        }
+    },
+}
+
+
+```
+
 
 ## Reference
 
