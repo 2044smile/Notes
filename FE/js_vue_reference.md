@@ -170,9 +170,10 @@ template 부분에서
     :label=""todo.label"
     @componentClick="toggleTodoState(todo)"
 />
-
-
 ```
+
+### App.vue
+위 파일은 보통 컴포넌트를 import 하거나 생성한 뷰를 HTML 엘리먼트에 마운트 시킵니다.
 
 ## Reference
 
