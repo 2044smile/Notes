@@ -175,6 +175,14 @@ template 부분에서
 ### App.vue
 위 파일은 보통 컴포넌트를 import 하거나 생성한 뷰를 HTML 엘리먼트에 마운트 시킵니다.
 
+
+### SPA 가 아닌 MVC 에서 사용할 때 FLOW
+만들어둔 Vue 코드를 SPA 가 아닌 MVC 를 사용하는 프레임워크에서 사용할 때는
+vue, vue-loader, vue-template-compiler를 설치하고, 웹팩 설정(webpack.config.js)을 해준 뒤 app.js 파일에서 
+Vue를 마운트 시켜줍니다. 마운트란 어떠한 HTML 엘리먼트에서 사용할지와 사용할 컴포넌트를 지정해줍니다.
+그리고 뷰를 마운트할 엘리먼트를 생성해주고, 컴포넌트를 사용하면 됩니다.
+ 
+
 ## Reference
 
 - 레시피 Vue 강의
