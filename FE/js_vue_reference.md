@@ -134,11 +134,45 @@ export defualt {
     },
 }
 ```
-- filter
-```javascript
+
+## Component
+1. component 폴더 안에 Todo.vue라는 파일을 생성해주겠습니다.
+```html
+<templete>
+    <button class="list-group-item text-left" @click="clickButton"">
+        {{ label }}
+    </button>
+</templete>
+<script>
+    export default {
+        props: ['label'],  // 여기를 props 로 지정하면서 html 코드가 {{ todo.label }} 에서 {{ label }}로 변경됩니다.
+        methods: {
+            clickButton(){
+                this.$emit('componentClick') 
+            }       
+        }
+    };
+</script>
+
+<!-- 이렇게 만들어주고 난 뒤 App.vue로 이동해서 import 를 해줍니다. -->
+import Todo from './components/Todo';
+
+그리고 Vue 코드 안에
+components: {
+    Todo,
+}
+
+위와 같이 설정해주고,
+
+template 부분에서
+
+<todo
+    :label=""todo.label"
+    @componentClick="toggleTodoState(todo)"
+/>
+
 
 ```
-
 
 ## Reference
 
