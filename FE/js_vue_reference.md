@@ -181,7 +181,21 @@ template 부분에서
 vue, vue-loader, vue-template-compiler를 설치하고, 웹팩 설정(webpack.config.js)을 해준 뒤 app.js 파일에서 
 Vue를 마운트 시켜줍니다. 마운트란 어떠한 HTML 엘리먼트에서 사용할지와 사용할 컴포넌트를 지정해줍니다.
 그리고 뷰를 마운트할 엘리먼트를 생성해주고, 컴포넌트를 사용하면 됩니다.
- 
+
+
+### Vue.js 는 크게 세가지 구성으로 나뉘어있다. 
+1. Vuex
+- 가삼 돔(Virtual DOM) 이라 불리는 녀석들을 관리하기 위한 매니저 역할을 한다.
+- 앱이나 웹을 이루는 개별 요소들의 정보가 변경되는지를 확인하고, 해당 값들을 업데이트시켜주는 역할을 한다.
+- 간단히 말하면 내가 관리해야할 아이들의 집주소를 모두 외우고 있지 않아도, 얘가 알아서 비서 역할을 해준다는 이야기다.
+2. Vue CLI
+- Vue Command Line Interface 의 약자로서. 프로젝트를 자동으로 생성 / 세팅해주는 자동화 역할을 한다.
+- 웹개발에 사용되는 여러 기능들을 모아둔 웹팩(Webpack)을 자동으로 모아, 간단하게 몇 번의 클릭만으로 기본적인 세팅을 해주는 역할
+- NPM 같은 패키지 매니저 역할을 한다고 생각하면 편하다. 
+3. Vue Router
+- 개별적인 vuex 가 돌아다니며 확인을 해야할 V-Dom 들을 향해 이동할 통로의 역할을 한다.
+- Vuex 상에 개별 콤포넌트들을 올려놓고, 그걸 Router 를 통해 간단히 끌어다가 다른 곳에서 반복적으로 사용할 수 있다.
+- Vuex 가 할일을 다 할 수 있도록 통로 역할을 하면서도 표지판 역할도 한다고 보면 됩니다.
 
 ## Reference
 
@@ -193,3 +207,4 @@ Vue를 마운트 시켜줍니다. 마운트란 어떠한 HTML 엘리먼트에서
 - https://kr.vuejs.org/v2/guide/index.html
 - 캡틴 판교님
   - https://joshua1988.github.io/web-development/javascript/promise-for-beginners/
+- https://brunch.co.kr/@clay1987/138
