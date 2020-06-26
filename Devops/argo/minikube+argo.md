@@ -16,5 +16,5 @@
 3. kind: Deployment 인 것들이 2개 있는데 그 2개의 apiVersion 을 apps/v1 으로 변경해줍니다.
 
 ### Reference
-- [Minikube 설치 가이드]: https://kubernetes.io/ko/docs/tasks/tools/install-minikube/
-- [Argo 설치 가이드(eng)]: https://medium.com/@doronsegal/workflow-using-argo-kubernetes-6b45ef3f1614
+- [https://kubernetes.io/ko/docs/tasks/tools/install-minikube/]: Minikube 설치 가이드
+- [https://medium.com/@doronsegal/workflow-using-argo-kubernetes-6b45ef3f1614]: Argo 설치 가이드(eng) 
