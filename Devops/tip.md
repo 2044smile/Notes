@@ -5,6 +5,11 @@
 - Containers -> main -> command:
 
 
+### minikube 는 부팅 시에 자동으로 실행이 안된다.
+- [ERROR] Unable to connect to the server: dial tcp i/o time out
+- [stackoverflow] https://stackoverflow.com/questions/49260135/unable-to-connect-to-the-server-dial-tcp-i-o-time-out
+
+
 ### Argo 에서 실행한 Workflow(Pod) 들을 한번에 제거할 수 있습니다.
 Ex) Parallel 하게 50개의 워크가 돌아간다고하면 삭제할 때 귀찮다.
 
