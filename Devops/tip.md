@@ -3,6 +3,8 @@
 ### Kubernetes 의 Pod 이 실행할 때 수행한 명령어를 볼 수 있습니다.
 - ```k get describe <pod name>```
 - Containers -> main -> command:
+- ```k logs -f <podname>  -c gateway-client ```
+- 띄워진 팟의 로그를 볼 수 있습니다. 뒤에 -c 는 떄에 따라 사용할 때가 있고 없을 때가 있습니다. 
 
 
 ### minikube 는 부팅 시에 자동으로 실행이 안된다.
