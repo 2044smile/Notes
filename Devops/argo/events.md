@@ -32,7 +32,12 @@ kubectl apply -f https://raw.githubusercontent.com/argoproj/argo-events/stable/m
 kubectl apply -n argo-events -f https://raw.githubusercontent.com/argoproj/argo-events/stable/examples/gateways/webhook.yaml
 ```
 
+### 내가 쓰려고 정리한 튜토리얼 생성
+```yaml
+kubectl create namespace argo-events
 
+kubectl apply -f https://raw.githubusercontent.com/argoproj/argo-events/stable/manifests/install.yaml
+```
 
 
 
