@@ -164,6 +164,37 @@ var appHeader = {
 
 ### Router
 
+### 뷰 라우터 등록
+```javascript
+var router = new VueRouter({
+    mode: 'history', // mode: URL의 해쉬(#) 값 제거 속성
+    routes: [
+        { path: '/login', component: LoginComponent },  // 해당 url 로 이동하였을 때 화면에 띄울 컴포넌트를 정의
+        { path: '/home', component: HomeComponent }  // component: 해당 페이지마다 띄워질 컴포넌트는 무조건 하나이다.
+    ] 
+})
+
+// 인스턴스에 라우터 인스턴스를 등록
+new Vue({
+    router: router
+})
+```
+
+### router-view
+- 브라우저의 주소 창에서 URL 이 변경되면 앞에서 정의한 routes 속성에 따라 해당 컴포넌트가 화면에 뿌려집니다.
+- 이 때 뿌려지는 지점이 템플릿의 router-view 입니다.
+
+### router-link
+- 화면에 어떠한 것을 클릭해서 페이지를 이동할 수 있게 하는 동작을 router-link 입니다.
+```html
+<router-link to="이동할 URL"></router-link>
+
+<div>
+    <router-link to="login"></router-link>
+</div>
+```
+
+
 #### Example
 ```html
 <!DOCTYPE html>
