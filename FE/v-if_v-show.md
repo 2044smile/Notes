@@ -26,9 +26,10 @@
 
 
 #### 차이점
+- **v-if, v-show 의 가장 큰 차이점은 Elements에 출력을 하냐 안하냐의 차이 입니다.**
 - v-if 는 조건에 따라 컴포넌트가 실제로 제거되고 생성된다.
 - 반면에 v-show는 단순히 CSS 의 display 속성만 변경된다.
-  - display: none, display: block 의 차이다. 초기 렌더링 때 DOM에 유지 된다.
+  - v-show="ok" 의 결과가 false 일 경우 -> display: none, display: block 의 차이다. 초기 렌더링 때 DOM에 유지 된다.
 - 사소한 차이지만 우리는 경우에 따라 v-if, v-show 디렉티브를 나눠서 사용할 수 있습니다.
   - toggle 작업이 자주 일어나는 경우 v-show가 유리하고 그 반대의 경우에는 v-if 가 유리합니다.
 
