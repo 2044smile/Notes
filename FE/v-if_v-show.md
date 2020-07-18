@@ -1,6 +1,13 @@
 ### v-if
 
+- v-if 로 조건문을 걸 수 있습니다.
 
+```html
+<div v-if="loading">
+</div>
+<div v-else>
+</div>
+```
 
 #### Example
 ```html
