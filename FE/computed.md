@@ -35,3 +35,57 @@
   </body>
 </html>
 ```
+
+### computed 속성을 이용한 클래스 코드 작성 방법
+
+- computed 속성을 이용한 클래스 코드 작성을 보기 전에 class binding 이라는 것을 이용하여 적용하는 것을 한번 보겠습니다.
+#### Class Binding Example
+```html
+<style>
+  .warning {
+    color: red;
+  }
+</style>
+<div id="app">
+  <p v-bind:class="{ warning: isError}">Hello</p>
+  <!-- class binding 
+    isError 가 True 면 warning 이 적용되고(빨간색)
+  false 이면 warning 이 적용되지 않습니다. -->
+</div>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      isError: false
+    }
+  })
+</script>
+```
+
+#### Compute Class Binding Example
+```html
+<style>
+  .warning {
+    color: red;
+  }
+</style>
+<div id="app">
+  <p v-bind:class="errorTextColor">Hello</p>
+  <!-- class binding 
+    isError 가 True 면 warning 이 적용되고(빨간색)
+  false 이면 warning 이 적용되지 않습니다. -->
+</div>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      isError: false
+    },
+    computed: {
+      errorTextColor: function(){
+        return this.isError ? 'warning' : null; // 3항 연산
+      }
+    }
+  })
+</script>
+```
