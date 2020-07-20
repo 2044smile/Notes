@@ -76,20 +76,28 @@ spec:
                     - name: message
                       # the value will get overridden by event payload from test-dep
                       value: hello world
+                    - name: status
+                      value: success
                 templates:
                   - name: whalesay
                     serviceAccountName: argo-events-sa
                     inputs:
                       parameters:
                         - name: message
+                        - name: status
                     container:
                       image: docker/whalesay:latest
                       command: [cowsay]
-                      args: ["{{inputs.parameters.message}}"]
+                      args: ["{{inputs.parameters.message}}", "{{inputs.parameters.message}}"]
           parameters:
             - src:
                 dependencyName: test-dep
-              dest: spec.arguments.parameters.0.value
+                dataKey: body.message
+              dest: spec.arguments.parameters.0.value # 받은 인풋을 사용하기 위해서는 이런식으로 사용하면 된다. 만약 여러개라면?
+            - src:
+                dependencyName: test-dep
+                dataKey: body.status
+              dest: spec.arguments.parameters.1.value # 받은 인풋을 사용하기 위해서는 이런식으로 사용하면 된다. 만약 여러개라면?
 ```
 
 
