@@ -270,5 +270,5 @@ spec:
 
 
 ### Reference 
-
-https://argoproj.github.io/argo-events/installation/
+- https://argoproj.github.io/argo-events/demo/notebooks/
+- https://argoproj.github.io/argo-events/installation/
