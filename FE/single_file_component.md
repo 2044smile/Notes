@@ -1,4 +1,4 @@
-### single file component
+### **single file component**
 - 싱글 파일 컴포넌트란 무엇일까?
   - 아주 간단하게는 .vue 확장자를 가진 것을 싱글 파일 컴포넌트라고 생각하면 됩니다.
 - 싱글 팡리 컴포넌트는 우리가 여태까지 배웠던 뷰를 사용하는 방식과는 많이 다릅니다. 아래 공식문서에서 가져온 예제를 살펴보겠습니다.
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-module.exports = {
+export default = {
     data: function() {
         return {
             greeting: 'Hello'
