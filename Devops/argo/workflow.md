@@ -134,3 +134,6 @@ spec:
       command: [sh, -c]
       args: ["echo result was: {{inputs.parameters.message}}"]
 ```
+
+### Reference
+- https://argoproj.github.io/argo/
