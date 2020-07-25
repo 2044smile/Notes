@@ -76,6 +76,9 @@ export default {
 </style>
 ```
 
+### 정리
+- 화면에서 vue 개발자 도구를 활용하여 App 에서 선언되어있는 str 안의 내용을 변경하면 TodoHeader 안의 데이터 값도 같이 변경됩니다. 왜냐하면 부모 -> 자식 관계로 데이터를 바인딩 하고 있기 때문입니다.
+
 
 ### Reference
 - https://kr.vuejs.org/v2/guide/single-file-components.html
