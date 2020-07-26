@@ -31,7 +31,7 @@ p {
 </style>
 ```
 
-### 싱글 파일 컴포넌트에서 props 속성  사용하는 방법
+## 싱글 파일 컴포넌트에서 props 속성  사용하는 방법
 
 1. App.vue 에서 자식에게 전달할 데이터를 정의하고 template 에서 v-bind 를 사용하여 propsdata 를 넘겨준다.
 
@@ -78,6 +78,8 @@ export default {
 
 ### 정리
 - 화면에서 vue 개발자 도구를 활용하여 App 에서 선언되어있는 str 안의 내용을 변경하면 TodoHeader 안의 데이터 값도 같이 변경됩니다. 왜냐하면 부모 -> 자식 관계로 데이터를 바인딩 하고 있기 때문입니다.
+
+## 싱글 파일 컴포넌트에서 event emit 구현하기
 
 
 ### Reference
