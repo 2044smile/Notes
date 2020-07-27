@@ -80,7 +80,6 @@ spec:
 ```
 ### Scripts & Results
 - 간단한 스크립트는 아래와 같이 작성할 수 있음
-- 
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -133,6 +132,35 @@ spec:
       image: alpine:latest
       command: [sh, -c]
       args: ["echo result was: {{inputs.parameters.message}}"]
+```
+
+### WorkflowTemplate Ref
+- 한 개의 워크플로우 템플릿에 정의한 여러 워크플로우를 가져올 때는 이름만 명시해주면 손쉽게 가져올 수 있습니다.
+
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: hello
+spec:
+  entrypoint: start-workflow
+  templates:
+  - name: start-workflow
+    steps:
+    - - name: getuuid  # 직접 명시하는 식으로 가져올 수도 있고,
+        template: uuid
+    - - name: ref
+        templateRef:
+          name: # 명시 할 WorkflowTemplate name 
+          template: # 명시 할 template name
+
+  - name: uuid
+    script:
+      image: python:alpine3.6
+      command: [python]
+      source: |
+        import uuid
+        print(uuid.uuid4())
 ```
 
 ### Reference
