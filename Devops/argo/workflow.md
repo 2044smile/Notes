@@ -1,6 +1,45 @@
 ### Argo Workflow
 
 
+### Argo input & output
+- 디렉토리나 파일을 다음 단계로 전달하기 위해서는 사용해야하는 몇 가지 시나리오가 있습니다.
+1. 매개 변수(parameters)를 사용하는 방법
+- 매개 변수 방법은 특정 텍스트의 내용을 읽고 다음 단계로 전달하는 것 입니다.
+#### EXAMPLE(https://github.com/argoproj/argo/blob/master/examples/output-parameter.yaml)
+
+
+2. 아티팩트(artifacts)를 사용하는 방법
+
+
+### 스크립트를 돌리고 파일을 생성하는 로직
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: init-
+spec:
+  entrypoint: start-workflow
+  templates:
+  - name: start-workflow
+    steps:
+    - - name: get-uuid  # GET UUID
+        template: create-uuid
+
+  - name: create-uuid
+  container:
+    image: python:alpine3.6
+    command: ["bin/sh"]
+    args: ["-c", "python -c \"import uuid; print(uuid.uuid4())\" > /tmp/uuid.txt"]
+    # bin/sh 로 들어가서 실행해야 한다 > /tmp/uuid.txt 는 shell 명령어 이기 때문에
+  outputs:
+    parameters:
+    - name: global-uuid
+      valueFrom:
+        path: /tmp/uuid.txt
+      globalName: global-uuid
+```
+
+
 #### global parameter
 - 글로벌 파라메타라는데 다른 yaml(workflow) 에서도 사용할 수 있을까?
 ```yaml
