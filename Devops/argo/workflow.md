@@ -5,11 +5,153 @@
 - 디렉토리나 파일을 다음 단계로 전달하기 위해서는 사용해야하는 몇 가지 시나리오가 있습니다.
 1. 매개 변수(parameters)를 사용하는 방법
 - 매개 변수 방법은 특정 텍스트의 내용을 읽고 다음 단계로 전달하는 것 입니다.
-#### EXAMPLE(https://github.com/argoproj/argo/blob/master/examples/output-parameter.yaml)
-
 
 2. 아티팩트(artifacts)를 사용하는 방법
 
+매개변수를 이용하여 다른 WorkflowTemplate 에 생성한 uuid 를 전달하였고 해결하기 위해 참고한 URL 들은 아래와 같습니다.
+- https://github.com/argoproj/argo/blob/master/examples/global-outputs.yaml
+- https://github.com/argoproj/argo/blob/master/examples/nested-workflow.yaml
+- https://github.com/argoproj/argo/blob/master/examples/global-outputs.yaml
+- https://argoproj.github.io/argo/examples/#parameters
+- https://argoproj.github.io/argo/examples/
+- https://github.com/argoproj/argo/blob/master/docs/workflow-templates.md#referencing-other-workflowtemplates
+- https://blog.argoproj.io/argo-workflow-release-v2-4-x-f4b2d66b9bd
+
+#### Argo Slack 에서 찾은 정보
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  generateName: {{ template "fullname" . }}-
+spec:
+  schedule: {{ .Values.schedule }}
+  workflowSpec:
+    entrypoint: pipeline
+    podGC:
+      strategy: OnWorkflowSuccess
+    volumes:
+      - name: gcloud-key
+        secret:
+          secretName: {{ template "fullname" . }}-gcloud-sa
+{{ toYaml .Values.config | indent 6 }}
+    templates:
+      - name: pipeline
+        steps:
+        - - name: extract-load
+            template: extract-load
+            arguments:
+              parameters:
+                [
+                  { name: instanceName, value: {{ `{{item.instanceName}}` | quote }} },
+                  { name: tableConfig, value: {{ `{{item.tableConfig}}` | quote }} },
+                  { name: gsqlInstance, value: {{ `{{item.gsqlInstance}}` | quote }} },
+                ]
+            withItems:
+{{ toYaml .Values.items | indent 12 }}
+      - name: extract-load
+        inputs:
+          parameters:
+            parameters:
+            - name: instanceName
+            - name: tableConfig
+            - name: gsqlInstance
+        dag:
+          tasks:
+            - name: extract
+              template: extract
+              arguments:
+                parameters:
+                  [
+                    { name: instanceName, value: {{ `{{inputs.parameters.instanceName}}` | quote }} },
+                    { name: tableConfig, value: {{ `{{inputs.parameters.tableConfig}}` | quote }} },
+                    { name: gsqlInstance, value: {{ `{{inputs.parameters.gsqlInstance}}` | quote }} }
+                  ]
+            - name: load
+              dependencies: [extract]
+              template: load
+              arguments:
+                parameters:
+                  [
+                    { name: instanceName, value: {{ `{{inputs.parameters.instanceName}}` | quote }} },
+                    { name: tableConfig, value: {{ `{{inputs.parameters.tableConfig}}` | quote }} }
+                  ]
+      - name: extract
+        inputs:
+          parameters:
+            - name: instanceName
+            - name: tableConfig
+            - name: gsqlInstance
+        outputs:
+          artifacts:
+            - name: {{ `logs-extract-{{inputs.parameters.instanceName}}` | quote }}
+              path: /tmp/logs.log
+              gcs:
+                serviceAccountKeySecret:
+                  key: serviceAccountKey
+                  name: argo-gcloud-sa
+                bucket: argo-logs
+                key: {{ `{{workflow.creationTimestamp.Y}}-{{workflow.creationTimestamp.m}}-{{workflow.creationTimestamp.d}}-{{workflow.name}}` | quote }}
+        retryStrategy:
+          limit: 2
+          retryPolicy: "Always"      
+        container:
+          image: "eu.gcr.io/candide-app-183912/pipeline-extract:latest"
+          envFrom:
+            - configMapRef:
+                name: {{ template "fullname" . }}
+          env:
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: /run/secrets/google/key.json
+            - name: GSQL_INSTANCE
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: {{ `{{inputs.parameters.gsqlInstance}}` | quote }}
+          volumeMounts:
+            - name: gcloud-key
+              mountPath: /run/secrets/google
+              readOnly: true
+            - name: {{ `{{inputs.parameters.tableConfig}}` | quote }}
+              mountPath: /config
+              readOnly: true
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+      - name: load
+        inputs:
+          parameters:
+            - name: instanceName
+            - name: tableConfig
+        outputs:
+          artifacts:
+            - name: {{ `logs-load-{{inputs.parameters.instanceName}}` | quote }}
+              path: /tmp/logs.log
+              gcs:
+                serviceAccountKeySecret:
+                  key: serviceAccountKey
+                  name: argo-gcloud-sa
+                bucket: argo-logs
+                key: {{ `{{workflow.creationTimestamp.Y}}-{{workflow.creationTimestamp.m}}-{{workflow.creationTimestamp.d}}-{{workflow.name}}` | quote }}
+        retryStrategy:
+          limit: 2
+          retryPolicy: "Always"      
+        container:
+          image: "eu.gcr.io/candide-app-183912/pipeline-load:latest"
+          envFrom:
+            - configMapRef:
+                name: {{ template "fullname" . }}
+          env:
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: /run/secrets/google/key.json
+          volumeMounts:
+            - name: gcloud-key
+              mountPath: /run/secrets/google
+              readOnly: true
+            - name: {{ `{{inputs.parameters.tableConfig}}` | quote }}
+              mountPath: /config
+              readOnly: true
+```
 
 ### 스크립트를 돌리고 파일을 생성하는 로직
 ```yaml
