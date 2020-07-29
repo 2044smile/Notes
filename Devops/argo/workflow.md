@@ -17,7 +17,7 @@
 - https://github.com/argoproj/argo/blob/master/docs/workflow-templates.md#referencing-other-workflowtemplates
 - https://blog.argoproj.io/argo-workflow-release-v2-4-x-f4b2d66b9bd
 
-#### Argo Slack 에서 찾은 정보
+#### Argo Slack
 ```yaml
 apiVersion: argoproj.io/v1alpha1
 kind: CronWorkflow
