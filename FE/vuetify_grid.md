@@ -50,4 +50,5 @@
 
 ### Reference
 - https://code-machina.github.io/2019/02/17/Vuetify-Layout-Part-1.html
-- [vuetify gird](https://codepen.io/code-machina,"link")
+- [vuetify grid](https://codepen.io/code-machina,"link")
+- [vuetify grid 최고 설명](https://chansbro.github.io/vue/vuetify_tutorial1,"link")
