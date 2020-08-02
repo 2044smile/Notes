@@ -5,11 +5,13 @@
 
 ## Devops
 - k8s
-- Argo
+- Argo Workflow
+- Argo Events
 - Helm3
 
 ## FE
 - Vue.js
+- Vuetify
 
 ## seminar
 - Django 라이트닝 토크
