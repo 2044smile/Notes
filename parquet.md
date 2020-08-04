@@ -8,6 +8,7 @@
 - 같은 종류의 데이터가 모여있으므로 압축률이 높습니다.
 - 일부 컬럼만 읽어 들일 수 있어 처리량을 줄일 수 있습니다.
 - 저장용량이 줄어든 것으로도 네트워크 I/O 가 줄어들기 때문에 처리 속도가 상당히 올라갑니다.
+- **열 지향은 "읽기" 에 이점이 있고, 행 지향은 "업데이트" 에 이점이 있습니다.** 빅데이터 생태계에서 열 중심을 선호하는 이유이다.
 
 
 [컬럼 기반 포맷과 로우 기반 포맷 비교 사진]('https://www.slideshare.net/larsgeorge/parquet-data-io-philadelphia-2013')
@@ -15,4 +16,5 @@
 
 
 ## Reference
-[타다 기술블로그]('http://engineering.vcnc.co.kr/2018/05/parquet-and-spark/')
+- [타다 기술블로그]('http://engineering.vcnc.co.kr/2018/05/parquet-and-spark/')
+- [열 지향 행 지향 차이점]('https://presmarymethuen.org/ko/dictionary/what-is-the-difference-between-a-column-oriented-and-a-row-oriented-database/')
