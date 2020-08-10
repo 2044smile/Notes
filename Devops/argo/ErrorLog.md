@@ -9,7 +9,7 @@
 container:
   image: blahblah:cslee-0.0.1
   env:
-    {{- range $key, value := .Values.blah.correct }}
+    {{- range $key, $value := .Values.blah.correct }}
     - name: {{ $key }}
       value: {{ $value }}
     {{end -}}
