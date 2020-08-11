@@ -45,6 +45,7 @@ container:
 
 # secret 을 꺼낼 때 \n newline 오류
 
+- echo -n "default" | base64 이런식으로 암호화를 진행하면 문제가 되지 않지만 echo deafult | base64 이런식으로 진행하면 오류가 발생함
 
 ## Reference
 - https://superuser.com/questions/1225134/why-does-the-base64-of-a-string-contain-n/1225139
