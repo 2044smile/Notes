@@ -49,3 +49,33 @@ container:
 
 ## Reference
 - https://superuser.com/questions/1225134/why-does-the-base64-of-a-string-contain-n/1225139
+
+# secret을 volumeMounts을 이용하여 파일로 생성하기
+- secret.yaml
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: connection-secret
+  namespace: Example
+type: Opaque
+data:
+  PROFILE_NAME: ZGVmYXVsdA== # echo -n "default" | base64 결과
+```
+
+- example.yaml
+```yaml
+container:
+  image: blahblah:latest
+  volumeMounts:
+    - name: secret-volume
+      mountPath: /root/.aws/
+  envFrom:
+  - secretRef:
+      name: connection-secret
+  command: ["python", "-m", "{{`{{inputs.parameters.wish}}`}}.{{`{{inputs.parameters.type}}`}}.{{`{{inputs.parameters.run}}`}}", "{{`{{inputs.parameters.part}}`}}", "{{`{{inputs.parameters.gender}}`}}", "{{`{{inputs.parameters.uuid}}`}}"]
+volumes:
+  - name: secret-volume
+    secret:
+      secretName: connection-secret
+```
