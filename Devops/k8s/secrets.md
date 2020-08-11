@@ -42,3 +42,9 @@ container:
 
 ## Reference
 - https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/
+
+# secret 을 꺼낼 때 \n newline 오류
+
+
+## Reference
+- https://superuser.com/questions/1225134/why-does-the-base64-of-a-string-contain-n/1225139
