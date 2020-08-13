@@ -1,4 +1,4 @@
-# How should it be developed
+# How should it be developed(DRF 어떻게 개발을 할 것 인가)
 
 ## Django REST Framework
 
