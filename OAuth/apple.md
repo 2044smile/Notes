@@ -51,8 +51,6 @@ client_secret = jwt.encode(
   - scope: 사용자의 정보를 가져올 수 있습니다. ex) scope: 'name email'
   - state: 클라이언트의 요청과 그에 따른 콜백 간의 상태를 유지하기 위해서 사용됩니다.
 
-- Backend 에서 
-
 ## Application
 
 - 애플리케이션에서는 클라이언트가 클릭할 수 있는 버튼을 아래와 같이 생성해주고, Apple 에서 제공받을 버튼을 생성해줍니다
@@ -76,3 +74,53 @@ client_secret = jwt.encode(
 </html>
 
 ```
+
+## 2. Backend 구현
+
+- Python 소셜 인증은 OAuth 2.0 표준이지만 Apple은 흐름에 약간의 차이가 있습니다. 따라서 Apple 로그인을 완료하려면 BaseOAuth2를 확장하고 일부 기능을 사용자가 정의하거나 재정의해야합니다.
+
+### GET id_token
+
+- 토큰 유효성 검사 호출에 대한 응답으로 Apple은 여러 가지가 포함 된 id_token을 반환하지만 두 가지가 중요합니다. Email 및 Sub 여기서 sub는 고유한 user_id이고 email은 가짜 또는 실제 사용자의 이메일 ID 입니다.
+(여기서 가짜 또는 실제 사용자의 이메일이라는 것은 사용자가 이메일 공개를 꺼려하여 설정을 하였다면 도메인 부분이 가짜 도메인으로 변경됩니다.)
+
+```python
+decoded = jwt.decode(id_token, '', verify=False)
+```
+
+- id_token 을 받아오기 위해선 ACCESS_TOKEN_URL 이 필요합니다.
+ex) POST 'https://appleid.apple.com/auth/token'
+- 같이 보낼 데이터는
+  - client_id  # APple Dev
+  - client_secret  # Apple Dev
+  - code  # Front 에서 설정한 redirect_uri 에서 받아올 수 있습니다.
+  - grant_type
+  - redirect_uri
+
+```python
+response_data = {}
+client_id, client_secret = self.get_key_and_secret()
+
+headers = {'content-type': "application/x-www-form-urlencoded"}
+data = {
+    'client_id': client_id,
+    'client_secret': client_secret,
+    'code': access_token,
+    'grant_type': 'authorization_code',
+    'redirect_uri': 'https://example-app.com/redirect'
+}
+
+res = requests.post(AppleOAuth2.ACCESS_TOKEN_URL, data=data, headers=headers)
+
+# ACCESS_TOKEN_URL 에는 /auth/token 으로 요청하는 URL이 들어있습니다.
+
+response_dict = res.json()
+```
+
+## Response
+
+- 여기서 한가지 알아야할 것은 사용자 이메일과 이름은 처음 요청할 때만 반환된다는 것 입니다.
+
+## Reference
+
+[sign-in-with-apple](https://gist.github.com/aamishbaloch/2f0e5d94055e1c29c0585d2f79a8634e)
