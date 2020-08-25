@@ -32,3 +32,12 @@ Ex) Parallel 하게 50개의 워크가 돌아간다고하면 삭제할 때 귀�
 ### AWS Configure 가 많은 경우 특정 profile 을 사용하고 싶을 때 
 
 ```AWS_PROFILE=test python manage.py runserver```
+
+### crd 파일은 CustomResourceDefinition의 줄임말이고 이것을 생성하고 싶을 때
+
+- 내렸다가 올려야 합니다.
+
+```helm delete <release name>```
+
+```helm install <release name> . ```
+
