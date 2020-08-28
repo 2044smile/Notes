@@ -41,3 +41,12 @@ Ex) Parallel 하게 50개의 워크가 돌아간다고하면 삭제할 때 귀�
 
 ```helm install <release name> . ```
 
+### kubectl config set-context
+
+- context 를 수정할 때 사용할 수 있습니다.
+
+```kubectl config set-context <cluster_name> --namepsace=<namespace>```
+
+- 현재 클러스터 내에서 네임스페이스만 변경하려면
+
+```kubectl config set-context --current --namepsace=<namespace>```
