@@ -137,3 +137,4 @@ export default new Vuex.Store({
 
 - [공식문서]('https://vuex.vuejs.org/kr/')
 - [공식문서 - state]('https://vuex.vuejs.org/kr/guide/state.html')
+- [맨땅에 개발하기]('https://www.youtube.com/watch?v=jdMWiIL-1fk&list=PLZzSdj89sCN292abcbI3utND8pA1T1OyB&index=3')
