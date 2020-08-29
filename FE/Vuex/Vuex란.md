@@ -106,6 +106,33 @@ const Counter = {
 }
 ```
 
+## 정리
+
+```javascript
+// store.js
+
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+export default new Vuex.Store({
+    state: { // Vue 인스턴스의 data 와 같다고 보시면 됩니다.
+        allUsers: [
+            {userId: 'plz1', password: '123', name: 'nick1'}
+            {userId: 'plz2', password: '123', name: 'nick2'}
+            {userId: 'plz3', password: '123', name: 'nick3'}
+        ]
+    },
+    mutations: {
+
+    },
+    actions: {
+
+    }
+})
+```
+
 ## Reference
 
 - [공식문서]('https://vuex.vuejs.org/kr/')
