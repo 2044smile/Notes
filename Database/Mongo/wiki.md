@@ -19,10 +19,24 @@ MongoDB 는 배경에서 언급한 내용을 해결하기 위한 적합한 데�
 - NoSQL
 - Schema-Free
 - 비 관계형 데이터베이스
+- database > collections > documents 구조로 document는 key-value 형태의 BSON(Nibary JSON) 으로 되어 있다.
 - MongoDB 는 RDBMS의 SQL 을 사용하지는 않지만 MongoDB는 SQL 못지 않은 다양한 종류의 쿼리문을 지원한다. (필터링, 수집, 정렬, 정규 표현식 등) 또한 MongoDB 는 외래키를 명시적으로 지원하지는 않지만, 논리적으로 도큐만드 간의 관계(Embedded Document)를 만들어서 사용하는데에는 아무런 문제가 없다. 그리고 RDBMS와 같지는 않지만 "$lookup" 이라는 집계 기능을 이용하면 관계형 데이터베이스와 비슷한 형태의 조인 처리를 수행할 수 있다.(샤딩 환경에서는 제약이 존재)
 - 스키마 프리가 아마도 MongoDB&RDBMS를 구분 지어줄 수 있는 가장 좋은 단어가 이다. 여기에서 스키마 프리는 테이블의 컬럼 수준에만 적용되는데, 사용할 컬럼을 미리 정의하지 않고 언제든지 동적으로 필요한 시점에 데이터를 저장할 수 있다는 것을 의미한다.(이러한 의미에서 Elasticsearch와 Solr 같은 검색엔진(색인)도 일종의 NoSQL이라 불리지 않을 까 싶다. 실제 샤딩,복제 등의 기능도 대부분의 검색엔진 솔루션 자체적으로 지원해준다.) 하지만 MongoDB는 모든 부분에 있어서 스키마 프리라고는 보기 힘들다. 다른 NoSQL 데이터베이스와는 달리 보조 인덱스를 생성할 수 있는데, MongoDB의 보조 인덱스는 항상 먼저 인덱스를 구성하는 필드를 먼저 정의해야 한다.
 
-## 장단점
+## 장점
+
+- Flexibility: Schema-less 라서 어떤 형태의 데이터라도 저장할 수 있다.
+- Performance: Read & Write 성능이 뛰어나다. 캐싱이나 많은 트래픽을 감당할 때 써도 좋다.
+- Scalability: 애초부터 스케일아웃 구조를 채택해서 쉽게 운영이 가능하다. Auto Sharding 지원
+- Deep Query ablilty: 문서지향적 Query Language를 사용하여 SQL 만큼 강력한 Query 성능을 제공한다.
+- Conversion / Mapping: JSON 형태로 저장이 가능해서 직관적이고 개발이 편리하다.
+
+## 단점
+
+- JOIN 이 없다. join이 필요없도록 데이터 구조화 필요
+- Memory Mapped File 으로 파일 엔진 DB이다. 메모리 관리를 OS 에게 위임한다. 메모리에 의존적, 메모리 크기가 성능을 좌우한다.
+- SQL을 완전히 이전할 수 없다.
+- B트리 인덱스를 사용하여 인덱스를 생성하는데, B트리는 크기가 커질수록 새로운 데이터를 입력하거나 삭제할 때 성능이 저하된다. 이런 B 트리의 특성 때문에 데이터를 넣어두면 변하지 않고 정보를 조회하는 데에 적합하다.
 
 ## Reference
 
