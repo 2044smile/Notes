@@ -8,4 +8,4 @@
 
 ## Reference
 
-- [he 3 Kubernetes Essentials: Cluster, Pipeline, and Registry](https://jfrog.com/blog/the-3-kubernetes-essentials-cluster-pipeline-and-registry/)
+- [The 3 Kubernetes Essentials: Cluster, Pipeline, and Registry](https://jfrog.com/blog/the-3-kubernetes-essentials-cluster-pipeline-and-registry/)
