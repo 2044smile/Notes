@@ -51,4 +51,8 @@ methods: {
 }
 ```
 
-- 위 예제를 보면 알 수 있듯이 actions 에서 직접 state 의 값을 변경하지 않고, context 라는 인자에 .commit 메서드를 사용하여 mutations 에 변화를 주고, mutations 는 commit 이 감지되면 state.product 의 값에 fetchedData를 넣게됩니다.
+- 위 예제 참고 flow
+
+1. 컴포넌트 methods 에서 actions 를 dispatch
+2. actions 에서 직접 state 의 값을 변경하지 않고, context 라는 인자에 .commit 메서드를 사용하여 mutations 에 변화를 줍니다.
+3. mutations 는 commit 이 감지되면 state.product 의 값에 fetchedData를 넣게됩니다.
