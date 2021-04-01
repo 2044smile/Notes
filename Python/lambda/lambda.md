@@ -302,6 +302,29 @@ three
 ''''''''''
 ```
 
+### Appropriate Uses of Lambda Expressions
+
+Python의 lambda는 아래와 같은 여러 논란들이 있다.
+
+- Issues with readability(가독성 문제)
+- The imposition of a functional way of thinking(기능적 사고방식 문제)
+- Heavy syntax with the lambda keyword(lambda keyword를 사용한 무거운 문법)
+
+**Classic Functional Constructs**
+lambda function은 built-in 기능으로 map() and filter()를 사용할 수 있습니다. 추가로 functools.reduce()와 같이 functools module도 사용할 수 있다.
+
+```python
+list(map(lambda x: x.upper(), ['cat', 'dog', 'cow']))
+['CAT', 'DOG', 'COW']
+
+list(filter(lambda x: 'o' in x, ['cat', 'dog', 'cow']))
+['dog', 'cow']
+
+from functools import reduce
+reduce(lambda acc, x: f'{acc} | {x}', ['cat', 'dog', 'cow'])
+'cat | dog | cow'
+```
+
 ## Reference
 https://realpython.com/python-lambda/
 decorator https://medium.com/@hckcksrl/python-%EB%8D%B0%EC%BD%94%EB%A0%88%EC%9D%B4%ED%84%B0-decorator-980fe8ca5276
