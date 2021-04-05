@@ -325,6 +325,49 @@ reduce(lambda acc, x: f'{acc} | {x}', ['cat', 'dog', 'cow'])
 'cat | dog | cow'
 ```
 
+**Key Functions**
+
+sort, sorted 둘 다 Key parameter를 갖고 있고 정렬을 목적으로 하는 함수를 넣는다. 여기서는 lambda를 이용한다.
+
+Key값을 기준으로 정렬되고 기본값은 오름차순(reverse=False)이다.
+
+- sort(): list method
+- sorted(), min(), max(): built-in functions
+- nlargest() and nsmallest(): in the Heap queue algorithm module heapq
+
+```python
+ids = ['id1', 'id2', 'id30', 'id3', 'id22', 'id100']
+print(sorted(ids))
+''''''''''
+['id1', 'id100', 'id2', 'id22', 'id3', 'id30']
+''''''''''
+
+sorted_ids = sorted(ids, key=lambda x: int(x[2:]))
+print(sorted_ids)
+''''''''''
+['id1', 'id2', 'id3', 'id22', 'id30', 'id100']
+''''''''''
+
+tuple_list = [
+    ('B', 1),
+    ('C', 8),
+    ('E', 3),
+    ('D', 4),
+    ('A', 10),
+]
+tuple_list.sort(key=lambda x: (x[0]))
+print(tuple_list)
+''''''''''
+[('A', 10), ('B', 1), ('C', 8), ('D', 4), ('E', 3)]
+''''''''''
+
+tuple_list.sort(key=lambda x: (x[1]))
+print(tuple_list)
+''''''''''
+[('B', 1), ('E', 3), ('D', 4), ('C', 8), ('A', 10)]
+''''''''''
+```
+
 ## Reference
 https://realpython.com/python-lambda/
 decorator https://medium.com/@hckcksrl/python-%EB%8D%B0%EC%BD%94%EB%A0%88%EC%9D%B4%ED%84%B0-decorator-980fe8ca5276
