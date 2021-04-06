@@ -315,39 +315,39 @@ lambda function은 built-in 기능으로 map() and filter()를 사용할 수 있
 
 ```python
 list(map(lambda x: x.upper(), ['cat', 'dog', 'cow']))
+''''''''''
 ['CAT', 'DOG', 'COW']
+''''''''''
 
 list(filter(lambda x: 'o' in x, ['cat', 'dog', 'cow']))
+''''''''''
 ['dog', 'cow']
+''''''''''
 
 from functools import reduce
 reduce(lambda acc, x: f'{acc} | {x}', ['cat', 'dog', 'cow'])
+''''''''''
 'cat | dog | cow'
+''''''''''
 ```
 
 **Key Functions**
-
 sort, sorted 둘 다 Key parameter를 갖고 있고 정렬을 목적으로 하는 함수를 넣는다. 여기서는 lambda를 이용한다.
-
 Key값을 기준으로 정렬되고 기본값은 오름차순(reverse=False)이다.
-
 - sort(): list method
 - sorted(), min(), max(): built-in functions
 - nlargest() and nsmallest(): in the Heap queue algorithm module heapq
-
 ```python
 ids = ['id1', 'id2', 'id30', 'id3', 'id22', 'id100']
 print(sorted(ids))
 ''''''''''
 ['id1', 'id100', 'id2', 'id22', 'id3', 'id30']
 ''''''''''
-
 sorted_ids = sorted(ids, key=lambda x: int(x[2:]))
 print(sorted_ids)
 ''''''''''
 ['id1', 'id2', 'id3', 'id22', 'id30', 'id100']
 ''''''''''
-
 tuple_list = [
     ('B', 1),
     ('C', 8),
@@ -360,13 +360,99 @@ print(tuple_list)
 ''''''''''
 [('A', 10), ('B', 1), ('C', 8), ('D', 4), ('E', 3)]
 ''''''''''
-
 tuple_list.sort(key=lambda x: (x[1]))
 print(tuple_list)
 ''''''''''
 [('B', 1), ('E', 3), ('D', 4), ('C', 8), ('A', 10)]
 ''''''''''
 ```
+
+
+### Alternatives to Lambda
+람다를 사용해야 하는 상당한 이유가 있지만 람다의 사용이 무시되는 경우도 있습니다. 그렇다면 그 대안은 무엇일까요?
+
+map(), filter(), functools.reduce()와 같은 고차 함수는 특히 목록 포괄 또는 생성자 표현과 함께 창의성이 약간 뒤틀리는 더 우아한 형태로 변환될 수 있다.
+
+목록 포괄성에 대해 자세히 알아보려면 Python에서 목록 이해를 사용할 때를 선택하십시오. 생성자 표현식에 대해 자세히 알아보려면 Python에서 생성자 및 수율을 사용하는 방법을 참조하십시오.
+
+**Map**
+built-in 함수인 map()은 첫 번째 인수(argument)로 함수를 받고, 두 번째 인수의 각 요소에 적용합니다.
+
+두 번째 인수에는 반복할 수 있는 iterable한 요소들이 옵니다, 예로는 문자열, 리스트 및 튜플이 있습니다.
+
+map()함수는 변환된 컬렉션에 해당하는 iterator를 반환합니다. 예를 들어 각 문자열이 대문자로 표시된 새 목록으로 문자열 목록을 반환하려는 경우 아래와 같이 map()을 사용할 수 있습니다.
+
+```python
+list(map(lambda x: x.capitalize(), ['cat', 'dog', 'cow']))
+''''''''''
+['Cat', 'Dog', 'Cow']
+''''''''''
+```
+
+map() 함수에서 return한 iterator를 Python 셸에서 확인하기 위해서는 list()를 이용하여 list로 변환해야 합니다.
+
+list comprehension으로도 위와 같은 문제를 예시를 구현할 수 있습니다.
+```python
+[x.capitalize(), ['cat', 'dog', 'cow']]
+''''''''''
+['Cat', 'Dog', 'Cow']
+''''''''''
+```
+
+**Filter**
+또 다른 고전적인 기능 구조인 내장 함수 필터()는 목록 이해로 변환할 수 있다. 첫 번째 인수로서 술어를 사용하고 두 번째 인수로서 반복할 수 있어야 한다. 그것은 술어 함수를 만족시키는 초기 컬렉션의 모든 요소를 포함하는 반복기를 구축한다. 다음은 지정된 정수 목록의 모든 짝수를 필터링하는 예입니다.
+
+```python
+even = lambda x: x%2 == 0
+list(filter(even, range(11)))
+''''''''''
+[0, 2, 4, 6, 8, 10]
+''''''''''
+```
+
+Filter() 는 iterator(반복자)를 반환하므로 반복자가 지정한 목록을 구성하는 기본 제공 유형 목록을 호출해야 합니다. 즉 list comprehension을 사용할 수 있습니다.
+
+```python
+[x for x in range(11) if x%2 == 0]
+''''''''''
+[0, 2, 4, 6, 8, 10]
+''''''''''
+```
+
+**Reduce**
+Python3 이후, reduce()는 built-in 함수에서 functools 모듈 함수로 전환되었다. recude()의 첫 2개의 argument는 가각 함수이고, 반복할 수 있다. 또 reseult accumulator의 초기 값으로
+사용되는 세 번째 argument로 이니셜라이저를 사용할 수도 있습니다.
+
+반복 항목의 각 요소에 대해 reduce() 기능을 적용하고, 반복 항목이 모두 소진될 때 반환되는 결과를 누적합니다.
+
+```python
+import functools
+pairs = [(1, 'a'), (2, 'b'), (3, 'c')]
+functools.reduce(lambda acc, pair: acc + pair[0], pairs, 0)
+''''''''''
+6
+''''''''''
+
+pairs = [(1, 'a'), (2, 'b'), (3, 'c')]
+sum(x for x, _ in pairs)  # 언더스코어(_)는 쌍의 두 번째 값을 무시할 수 있음을 나타내는 Python 규약입니다.
+''''''''''
+6
+''''''''''
+```
+
+### Are Lambdas Pythonic or Not?
+PEP 8, 람다 식을 식별자에 직접 바인딩하는 할당 문 대신 항상 def문을 사용하십시오.
+
+이는 주로 함수를 사용하고 더 많은 이점을 가져야 하는 식별자에 바인딩된 람다 사용을 강하게 억제한다. PEP8은 람다의 다른 용도는 언급하지 않는다. 앞서 말한 것들을 상기해보면 람다 함수는 제한적이긴 하지만 분명히 유용하게 사용될 수 있습니다.
+
+람다 함수는 완벽하게 Pythonic하다고 할 수 있다.
+
+### Conclusion
+
+- Python 람다 쓰기 및 익명 함수 사용
+- 람다 또는 일반 Python 함수 중에서 현명하게 선택
+- 과도한 람다 사용 자제
+- 고차 함수(higher-oder) 또는 Python Key function에 람다 사용
 
 ## Reference
 https://realpython.com/python-lambda/
