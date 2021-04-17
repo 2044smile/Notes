@@ -179,7 +179,7 @@ print((trace(lambda x: x ** 2))(3))
 
 **lambda Decorator example - map()**
 ```python
-list(map(trace(lambda x: x*2, range(3)))
+list(map(trace(lambda x: x*2), range(3)))
 ''''''''''
 [TRACE] Calling <lambda> with args (0,) and kwargs {}
 [TRACE] Calling <lambda> with args (1,) and kwargs {}
