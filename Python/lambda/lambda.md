@@ -205,7 +205,7 @@ def outer_func(x):
 
 for i in range(3):
     closure = outer_func(i)
-    print(f"closure({i+5}) = {closure(i+5)})
+    print(f"closure({i+5}) = {closure(i+5)}")
 
 ''''''''''
 x = 0, y = 4, z = 5
