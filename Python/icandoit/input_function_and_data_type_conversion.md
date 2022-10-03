@@ -24,4 +24,19 @@ str(52) # 숫자 -> 문자열
 # 예외
 int("hello")
 int("52.273")
+
+# *스왑
+
+a = input("문자열 입력> ") # hello
+b = input("문자열 입력> ") # world
+
+# **case 1
+print(a, b) # hello world
+a, b = b, a
+print(a, b) # world hello
+
+# **case 2
+c = a
+a = b
+b = c
 ```
