@@ -11,7 +11,20 @@ print(a + "+" + b + "=" + (a + b)) # TypeError 발생 문자열과 숫자
 ```python
 print("{}".format(10))
 print("{}년{}월{}일".format(2022, 10, 1))
+print("{} + {} = {}".format(a, b, a + b))
 ```
+
+## f-문자열
+```python
+a = 10
+b = 20
+print(f"{a} + {b} = {a + b}")
+
+f"""{a} + {b} = {a + b}
+{a} - {b} = {a - b}
+{a} * {b} = {a * b}
+{a} / {b} = {a / b}"""
+``` 
 
 ## split 함수
 ```python
