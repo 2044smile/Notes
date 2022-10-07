@@ -98,4 +98,23 @@ False or False  # True
 # -> is전기차() or is하이브리드차()
 ```
 
+# 날짜/시간 구하는 방법
+```python
+import datetime
+import pytz
+
+
+seoul = pytz.timezone("Asia/Seoul")  # 시간
+now = datetime.datetime.now(seoul)  # 날짜
+
+print("{}년 {}월 {}일 {}시 {}분 {}초".format(
+  now.year
+  now.month,
+  now.day
+  now.hour
+  now.minute
+  now.second
+))
+```
+
 
