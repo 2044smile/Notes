@@ -116,4 +116,12 @@ print("잘가" in "안녕하세요") # False
 "{:=.1f}".format(52.123) # 52.1
 "{:=.2f}".format(52.123) # 52.12
 "{:=.3f}".format(52.123) # 52.123
+
+### 내용 추가
+"My name is {0:<10}".format('left')  # 왼쪽 정렬
+# 'My name is left      '
+"My name is {0:>10}".format('right')  # 오른쪽 정렬
+# 'My name is      right
+"My name is {0:^10}".format('center')  # 가운데 정렬
+# 'My name is   center  '
 ```
