@@ -43,3 +43,5 @@ elif number < 0:
 else:
     print("0 입니다")
 ```
+
+Python Tutor에서 양수, 음수, 0일 때 어떻게 타고 가는지 살펴보자.
