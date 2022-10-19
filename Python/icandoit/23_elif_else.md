@@ -17,3 +17,16 @@ a = int(input("숫자를 입력해주세요: "))
 f = lambda a: "짝수이다" if a % 2 == 0 else "홀수이다"
 print(f)
 ```
+
+### 오전 오후 구분
+```python
+from pytz import timezone
+from datetime import datetime
+
+today = datetime.now(timezone('Asia/Seoul'))
+today.hour
+if today.hour < 12:
+    print("오전")
+if today.hour >= 12:
+    print("오후")
+```
