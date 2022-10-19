@@ -30,3 +30,16 @@ if today.hour < 12:
 if today.hour >= 12:
     print("오후")
 ```
+
+## elif
+
+```python
+number = int(input("정수 입력: ))
+
+if number > 0:
+    print("양수")
+elif number < 0:
+    print("음수")
+else:
+    print("0 입니다")
+```
