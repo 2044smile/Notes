@@ -14,4 +14,11 @@ if x > 4:  # 10 > 4 true
     # else 케이스가 없기 떄문에 출력하지 않는다.
 else:
     print(x + y)
+
+if x > 10:
+    if x < 20:
+        print("조건에 맞습니다")
+# 변경
+if (x > 10) and (x < 20):
+    print("조건에 맞습니다")
 ```
