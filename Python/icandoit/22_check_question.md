@@ -1,8 +1,8 @@
 # 문제
 
 ```python
-a = int(input("> 1번 째 숫자: "))
-b = int(input("> 2번 째 숫자: "))
+a = float(input("> 1번 째 숫자: "))
+b = float(input("> 2번 째 숫자: "))
 print()
 
 if a > b:
