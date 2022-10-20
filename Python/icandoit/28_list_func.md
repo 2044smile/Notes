@@ -61,4 +61,13 @@ a.sort(reverse=True)
 print(a)  # 내림차순, [99, 66, 22, 11, 5, 0]
 ```
 
-## 요소 존재를 확인: in, not in 
+## 요소 존재를 확인: in, not in
+```python
+# 영어는 "in 뒤에 큰 것"이 옵니다.
+# 연필 in 상자
+# 강아지 in 공원
+print(5 in a)  # True
+print(100 in a)  # False
+print(5 not in a)  # False
+print(100 not in a)  # True
+```
