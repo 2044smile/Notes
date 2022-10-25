@@ -45,8 +45,24 @@ for 반복변수 in 리스트:
     복합구문
 
 a = [1,2,3,4,5]
+
+# 반복변수: a의 요소가 하나하나
+# a의 요소가 무엇을 나타내는지 쉽게 이해할 수 있는 변수 이름
+# i, j, k, m, ...
 for aa in a:
     print(aa)
+
+# 총합
+sum = 0
+for aa in a:
+    sum = sum + aa
+print(sum)
+
+# 총곱
+prod = 0
+for aa in a:
+    prod = prod * aa
+print(prod)
 ```
 
 2. for 반복문으로 총합과 총곱 구하기
