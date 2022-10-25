@@ -53,13 +53,13 @@ for aa in a:
     print(aa)
 
 # 총합
-sum = 0
+sum = 0 # 항등원
 for aa in a:
     sum = sum + aa
 print(sum)
 
 # 총곱
-prod = 0
+prod = 1 # 항등원 0으로 초기화 했다면 0 * 1 * 2 * 3 * 4 * 5 하면 0이 출력된다.
 for aa in a:
     prod = prod * aa
 print(prod)
