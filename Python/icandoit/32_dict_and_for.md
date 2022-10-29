@@ -34,4 +34,23 @@ product['분류']  # human
 for key in product:
     print(key)  # Key
     print(product[key])  # Value
+
+
+products = [{
+    '제품명': 'cslee',
+    '가격': '100000000000000',
+    '분류': 'human'
+},{
+    '제품명': 'Tim',
+    '가격': '100000000000000000000',
+    '분류': 'human'
+}
+]
+
+for product in products:
+    for key in product:
+        print(key)
+        print(product[key])
+        print()
+    print("-" * 20)
 ```
