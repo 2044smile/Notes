@@ -13,15 +13,15 @@ product[0][1]
 
 ## 딕셔너리 탄생
 ```python
-dic = {
+product = {
     '제품명': 'cslee',
     '가격': '100000000000000',
     '분류': 'human'
 }
 
-dic['제품명']  # cslee
-dic['가격']  # 4000
-dic['분류']  # human
+product['제품명']  # cslee
+product['가격']  # 4000
+product['분류']  # human
 
 
 # {}를 사용
@@ -29,4 +29,9 @@ dic['분류']  # human
 # 키: 숫자, 문자열, 불(, 튜플)
 # 값: 모든 값
 
+# 딕셔너리와 for 반복문
+
+for key in product:
+    print(key)  # Key
+    print(product[key])  # Value
 ```
