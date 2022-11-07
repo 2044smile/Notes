@@ -36,6 +36,15 @@ for key in character:
     else:
         print(f"{key} : {character[key]}")
 
+# dict 안에 key로 value가 str, list, dict 로 분류되기 떄문에
+# 한번 for 문을 돌게되면 for key in charactor:
+# charactor[key]  == dict 안에 key를 찾아 오고, 그게 {} dict 인지 list 인지 str인지 판별한다.
+{
+    "name" : "cslee",
+    "items": {'a': 'b'}
+    "lst": [1,2,3,]
+}
+
 # name : 기사
 # level : 12
 # sword : 불꽃의 검
