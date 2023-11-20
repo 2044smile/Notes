@@ -119,7 +119,7 @@ john-pod-label   1/1     Running   0          37m   env=debug,tier=backend
 
 ```markdown
 # env 키를 포함한 레이블
-root@k8s-m:~# kubectl get pod **--show-labels -l** env
+root@k8s-m:~# kubectl get pod **--show-labels -l env**
 NAME             READY   STATUS    RESTARTS   AGE   LABELS
 john-pod-label   1/1     Running   0          60m   env=debug,tier=backend
 
@@ -132,6 +132,16 @@ john-pod-label2   1/1     Running   0          5m50s   creation_method=manual,ti
 root@k8s-m:~# kubectl get pod **--show-labels -l env=debug**
 NAME             READY   STATUS    RESTARTS   AGE   LABELS
 john-pod-label   1/1     Running   0          61m   env=debug,tier=backend
+
+# env 키에 debug나 prod값이 포함된 레이블
+root@k8s-m:~# kubectl get pods **--show-labels -l 'env in (prod,debug)'**
+NAME             READY   STATUS    RESTARTS   AGE   LABELS
+john-pod-label   1/1     Running   0          74m   env=debug,tier=backend
+
+# env 값에 debug 값을 제외한 레이블
+root@k8s-m:~# kubectl get pods **--show-labels -l 'env notin(debug)'**
+NAME              READY   STATUS    RESTARTS   AGE   LABELS
+john-pod-label2   1/1     Running   0          23m   creation_method=manual,tier=backend
 ```
 
 
