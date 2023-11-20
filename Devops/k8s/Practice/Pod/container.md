@@ -97,6 +97,44 @@ NAME             READY   STATUS    RESTARTS   AGE   ENV
 john-pod-label   1/1     Running   0          58s   prod
 ```
 
+### Modified a Label
+* --overwrite 옵션을 이용하면 기존 Pod 레이블 수정이 가능하다.
+
+기존 레이블 env=prod 레이블을 env=debug로 변경
+
+```markdown
+root@k8s-m:~# kubectl label pod john-pod-label env=debug --overwrite
+pod/john-pod-label labeled
+
+root@k8s-m:~# kubectl get pod --show-labels
+NAME             READY   STATUS    RESTARTS   AGE   LABELS
+john-pod-label   1/1     Running   0          37m   env=debug,tier=backend
+```
+
+## Label Selector
+* Label Selector는 Label 보다 옵션을 선택할 수 있다.
+  * 특정한 키를 포함하거나 포함하지 않는 Label
+  * 특정한 키와 값을 가진 Label
+  * 특정한 키를 가지고 있지만 다른 값을 가진 Label
+
+```markdown
+# env 키를 포함한 레이블
+root@k8s-m:~# kubectl get pod **--show-labels -l** env
+NAME             READY   STATUS    RESTARTS   AGE   LABELS
+john-pod-label   1/1     Running   0          60m   env=debug,tier=backend
+
+# env 키를 제외한 레이블
+root@k8s-m:~# kubectl get pod **--show-labels -l '!env'**
+NAME              READY   STATUS    RESTARTS   AGE     LABELS
+john-pod-label2   1/1     Running   0          5m50s   creation_method=manual,tier=backend
+
+# env=debug 키와 값을 포함한 레이블
+root@k8s-m:~# kubectl get pod **--show-labels -l env=debug**
+NAME             READY   STATUS    RESTARTS   AGE   LABELS
+john-pod-label   1/1     Running   0          61m   env=debug,tier=backend
+```
+
+
 ## Node Schedule
 * 직접 선택하는 방법과 Kubernetes 가 자동으로 선택[스케줄러] 하는 방법이 존재한다.
   * 조건: node-1, node-2 노드가 존재한다.
