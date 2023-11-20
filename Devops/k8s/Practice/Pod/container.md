@@ -187,5 +187,30 @@ spec:
 * CPU는 초과 시 request로 낮춘다. Over 시 종료되지 않는다.
   * ***프로세스가 CPU 자원을 사용할 때 부하가 오더라도 느려지지 종료되지 않는다.***
 
+## ReplicationController
+
+```yaml
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: replication-1
+spec:
+  replicas: 1
+  selector:
+    app: rc
+  template:
+    metadata:
+      name: pod-1
+      labels:
+        app: rc
+    spec:
+      containers:
+      - name: container
+        image: tmkube/init
+```
+
+* ReplicationController 가 생성되면 파드는 종료되더라도 자동으로 생성된다.
+  * 하지만 파드가 삭제되었다면 IP는 변경된다.
+
 # Reference
 * https://anggeum.tistory.com/entry/Kubernetes-%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4-%EB%A0%88%EC%9D%B4%EB%B8%94-%EC%96%B4%EB%85%B8%ED%85%8C%EC%9D%B4%EC%85%98-Label-Annotation-Deep-Dive
