@@ -95,6 +95,18 @@ john-pod-label   1/1     Running   0          44s   **backend   prod**
 root@k8s-m:~# kubectl get pod -L env
 NAME             READY   STATUS    RESTARTS   AGE   ENV
 john-pod-label   1/1     Running   0          58s   prod
+
+# Service 특정 라벨을 가진 Pod를 선택, 즉 같은 라벨을 가진 Pod 들이 한 그룹으로 묶여 동일한 서비스에 응답하도록 할 수 있게 해줍니다.
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-for-prod
+spec:
+  selector:
+    **lo: production**
+  ports:
+    - port: 8080
 ```
 
 ### Modified a Label
@@ -148,6 +160,7 @@ john-pod-label2   1/1     Running   0          23m   creation_method=manual,tier
 ## Node Schedule
 * 직접 선택하는 방법과 Kubernetes 가 자동으로 선택[스케줄러] 하는 방법이 존재한다.
   * 조건: node-1, node-2 노드가 존재한다.
+* 노드를 지정하지 않으면 여유 있는 노드로 할당 시킨다.
 
 ### 직접 선택
 
@@ -159,6 +172,7 @@ metadata:
 spec:
   nodeSelector:
     hostname: node-1
+    # kubernetes.io/hostname: k8s-node1
   containers:
   - name: container
     image: tmkube/init
