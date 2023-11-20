@@ -96,3 +96,48 @@ root@k8s-m:~# kubectl get pod -L env
 NAME             READY   STATUS    RESTARTS   AGE   ENV
 john-pod-label   1/1     Running   0          58s   prod
 ```
+
+## Node Schedule
+* 직접 선택하는 방법과 Kubernetes 가 자동으로 선택[스케줄러] 하는 방법이 존재한다.
+  * 조건: node-1, node-2 노드가 존재한다.
+
+### 직접 선택
+
+```yaml
+apiVersion:
+kind: Pod
+metadata:
+  name: pod-1
+spec:
+  nodeSelector:
+    hostname: node-1
+  containers:
+  - name: container
+    image: tmkube/init
+```
+
+### 스케줄러가 판단
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-1
+spec:
+  containers:
+    - name: container
+      image: tmkube/iknit
+      resources:
+        requests:  # 요구
+          memory: 2Gi
+        limits:  # 최대 허용 메모리
+          memory: 3Gi
+```
+
+* ***Memory는 초과 시 Pod를 종료시킨다.***
+  * Why? 잘못 되면 프로세스 간에 치명적인 문제
+* CPU는 초과 시 request로 낮춘다. Over 시 종료되지 않는다.
+  * ***프로세스가 CPU 자원을 사용할 때 부하가 오더라도 느려지지 종료되지 않는다.***
+
+# Reference
+* https://anggeum.tistory.com/entry/Kubernetes-%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4-%EB%A0%88%EC%9D%B4%EB%B8%94-%EC%96%B4%EB%85%B8%ED%85%8C%EC%9D%B4%EC%85%98-Label-Annotation-Deep-Dive
