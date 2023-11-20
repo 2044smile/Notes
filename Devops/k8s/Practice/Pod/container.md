@@ -10,15 +10,15 @@ kind: Pod
 metadata:
   name: pod-1
 spec:
-	containers:
-	- name: container-1
-		image: tmkube/p8000
-	  ports:
-		- containerPort: 8000
-	- name: container-2
-		image: tmkube/p8080
-		ports:
-		- containerPort: 8080
+  containers:
+    - name: container-1
+      image: tmkube/p8000
+      ports:
+      - containerPort: 8000
+    - name: container-2
+      image: tmkube/p8080
+      ports:
+      - containerPort: 8080
 ```
 
 ## Label
@@ -60,20 +60,20 @@ metadata:
 spec:
   selector:
     type: web
-	ports:
-		- port: 8080
+    ports:
+    - port: 8080
 ---
 apiVersion: v1
 kind: Pod
 metadata:
-	name: pod-1
-	labels:
-		type: web
-		lo: dev
+  name: pod-1
+  labels:
+    type: web
+    lo: dev
 spec:
-	containers:
-	- name: container
-		image: tmkube/init
+  containers:
+    - name: container
+      image: tmkube/init
 ```
 
 ### Check a Label
