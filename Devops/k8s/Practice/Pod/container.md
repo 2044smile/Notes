@@ -75,3 +75,24 @@ spec:
 	- name: container
 		image: tmkube/init
 ```
+
+### Check a Label
+* --show-labels 를 통해 Pod에 부착되어 있는 Label 을 확인 할 수 있다.
+* -L 을 통해 특정 레이블로 이루어진 Pod 를 필터링 할 수 있다.
+* **라벨의 각 키는 특정 객체에 대해 고유해야 한다.**
+
+```markdown
+# Pod에 레이블 표시
+root@k8s-m:~# kubectl get pod --show-labels
+NAME             READY   STATUS    RESTARTS   AGE   LABELS
+john-pod-label   1/1     Running   0          29s   **env=prod,tier=backend**
+
+# Pod 특정 레이블만 관심 있는 경우
+root@k8s-m:~# kubectl get pod -L tier,env
+NAME             READY   STATUS    RESTARTS   AGE   TIER      ENV
+john-pod-label   1/1     Running   0          44s   **backend   prod**
+
+root@k8s-m:~# kubectl get pod -L env
+NAME             READY   STATUS    RESTARTS   AGE   ENV
+john-pod-label   1/1     Running   0          58s   prod
+```
