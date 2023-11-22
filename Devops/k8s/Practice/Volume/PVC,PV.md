@@ -25,6 +25,7 @@
 * storageClassName: 스토리지 클래스를 지정합니다. 스토리지 클래스는 PV를 동적으로 생성할 때 사용되는 템플릿을 정의합니다. 즉, PVC 에서 요청한 스토리지를 제공하는데 사용합니다.
 * local: 로컬 디스크에 PV를 생성할 때 사용되는 옵션입니다. EX] path
 * nodeAffinity: **PV를 특정 노드에 바인딩하기 위한 규칙을 정의**합니다.
+
 ```yaml
 spec:
   capacity:
