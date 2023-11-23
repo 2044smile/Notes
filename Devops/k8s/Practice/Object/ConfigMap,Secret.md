@@ -29,33 +29,34 @@ data:
   language: python
 
 # Deployment 정의
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cm-deployment
- spec:
-   replicas: 3
-    minReadySeconds: 5
-     selector:
-        matchLabels:
-           app: cm-literal
-        template:
-           metadata:
-              name: cm-literal-pod
-               labels:
-                  app: cm-literal
-               spec:
-                  containers:
-                   - name: cm
-                      image: gcr.io/terrycho-sandbox/cm:v1        imagePullPolicy: Always
-                       ports:
-                        - containerPort: 8080
-                         env:  # 환경변수 정의
-                          - name: LANGUAGE
-                             valueFrom:  # 데이터는 valueFrom 을 이용해서 configMap 을 읽어오도록 하였다.
-                                configMapKeyRef:
-                                    name: hello-tim
-                                    key: language
+  name: cm-deployment
+spec:
+  replicas: 3
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: cm-literal
+  template:
+    metadata:
+      name: cm-literal-pod
+      labels:
+        app: cm-literal
+    spec:
+      containers:
+      - name: cm
+        image: gcr.io/terrycho-sandbox/cm:v1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:  # 환경변수 정의
+        - name: LANGUAGE
+          valueFrom:  # 데이터는 valueFrom 을 이용해서 configMap 을 읽어오도록 하였다.
+            configMapKeyRef:
+              name: hello-tim
+              key: language
 ```
 
 ### File
