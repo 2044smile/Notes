@@ -72,6 +72,44 @@ address=seoul
 
 * 위와 같이 키는 myname, 값은 tim 이 된다.
 
+### 디스크 볼륨으로 마운트하기
+
+* Pod의 디스크 볼륨으로 마운트
+  
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cm-file-deployment-vol
+spec:
+  replicas: 3
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: cm-file-vol
+  template:
+    metadata:
+      name: cm-file-vol-pod
+      labels:
+        app: cm-file-vol
+    spec:
+      containers:
+      - name: cm-file-vol
+        image: gcr.io/terrycho-sandbox/cm-file-volume:v1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+          - name: config-profile
+            mountPath: /tmp/config
+      volumes:
+      - name: config-profile
+        configMap:
+          name: cm-file
+```
+
+* configMap 을 디스크 볼륨으로 마운트해서 사용하는 방법은 volumes 을 configMap 으로 정의하면 된다.
+
 ## Secret
 
 * 1MB 용량으로 제한되어 있다.
