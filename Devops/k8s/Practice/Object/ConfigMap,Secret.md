@@ -14,6 +14,49 @@
 * Key, Value 를 무한히 넣을 수 있다.
 * **literal(문자)**로 생성하는 방법과 **파일**로 생성하는 방법이 있다.
 
+### literal
+
+* kubectl create configmap [configmap 이름] --from-literal=[키]=[값] 식으로 생성 -> kubectl create configmap hello-tim --from-literal=language=python
+
+아래와 같이 yaml 파일로도 ConfigMap 을 생성할 수 있다.
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hello-tim
+data:
+  language: python
+
+# Deployment 정의
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: cm-deployment
+ spec:
+   replicas: 3
+    minReadySeconds: 5
+     selector:
+        matchLabels:
+           app: cm-literal
+        template:
+           metadata:
+              name: cm-literal-pod
+               labels:
+                  app: cm-literal
+               spec:
+                  containers:
+                   - name: cm
+                      image: gcr.io/terrycho-sandbox/cm:v1        imagePullPolicy: Always
+                       ports:
+                        - containerPort: 8080
+                         env:  # 환경변수 정의
+                          - name: LANGUAGE
+                             valueFrom:  # 데이터는 valueFrom 을 이용해서 configMap 을 읽어오도록 하였다.
+                                configMapKeyRef:
+                                    name: hello-tim               key: language
+```
+
 ## Secret
 
 * 1MB 용량으로 제한되어 있다.
