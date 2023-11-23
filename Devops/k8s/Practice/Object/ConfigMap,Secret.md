@@ -14,7 +14,7 @@
 * Key, Value 를 무한히 넣을 수 있다.
 * **literal(문자)**로 생성하는 방법과 **파일**로 생성하는 방법이 있다.
 
-### literal
+### literal[문자]
 
 * kubectl create configmap [configmap 이름] --from-literal=[키]=[값] 식으로 생성 -> kubectl create configmap hello-tim --from-literal=language=python
 
@@ -57,6 +57,20 @@ metadata:
                                     name: hello-tim
                                     key: language
 ```
+
+### File
+
+* literal와 같이 개별 값을 공유할 수도 있지만, 설정을 파일 형태로 해서 Pod에 공유하는 방법도 있다.
+* 파일을 이용해서 ConfigMap 을 만들 때는 아래와 같이 --from-file을 이용해서 파일명을 넘겨주면 된다.
+  * kubectl create configmap tim-file --from-file=./properties/profile.properties
+
+```yaml
+myanme=tim
+email=tim@korea.com
+address=seoul
+```
+
+* 위와 같이 키는 myname, 값은 tim 이 된다.
 
 ## Secret
 
