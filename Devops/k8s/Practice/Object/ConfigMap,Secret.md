@@ -54,7 +54,8 @@ metadata:
                           - name: LANGUAGE
                              valueFrom:  # 데이터는 valueFrom 을 이용해서 configMap 을 읽어오도록 하였다.
                                 configMapKeyRef:
-                                    name: hello-tim               key: language
+                                    name: hello-tim
+                                    key: language
 ```
 
 ## Secret
