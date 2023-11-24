@@ -118,3 +118,4 @@ spec:
 # Reference
 
 * https://bcho.tistory.com/1267
+* ChatGPT
