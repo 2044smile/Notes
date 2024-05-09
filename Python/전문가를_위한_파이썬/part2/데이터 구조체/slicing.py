@@ -103,3 +103,18 @@ tup[2] += [50, 60]  # type error
 ### dis.dis('s[a] += b')
 print(tup)  # (1, 2, [30, 40, 50, 60])
 
+## 2.7 list.sort() 와 sorted() 내장함수
+### sort() 는 객체 자체를 정렬하고 싶을 때; 리스트 내부를 변경해서 정렬; 새로운 리스트를 생성하지 않았음을 알려주기 위해 None을 반환
+lst = [1,2,3]
+lst.sort(reverse=True)  # [3, 2, 1]
+#### print(lst) [3,2,1]
+### sorted() 다른 객체를 생성해 저장하고 싶을 때; 내장 함수; 불변 시퀀스 및 제너레이터를 포함해서 반복 가능한 모든 객체를 인수로 받을 수 있다.
+target = sorted(lst)
+#### sorted() 함수는 언제나 새로 생성한 리스트를 반환한다.
+# keyword 
+# - reverse 
+#   - default False
+# - key
+#   - 적용할 함수을 인수로 받는다. EX] lambda, str.lower, len
+#   - key 선택적 키워드 매개변수는 min(), max() 내장 함수 및 itertools.groupby(), ... 표준 라이브러리 함수와 함꼐 사용할 수 있다.
+#### 시퀀스를 정렬할 후에는 아주 효율적으로 검색할 수 있다.
