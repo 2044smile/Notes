@@ -68,4 +68,26 @@ for i in range(3):
 #### 지능형 리스트
 board = []
 for i in range(3):
+    # row = ['_'] * 3
     board.append(['_'] * 3)
+
+## 2.6 시퀀스의 복합 할당
+### +=과 *= 등의 복합 할당 연산자는 첫 번째 피연산자에 따라 상당히 다르게 작동한다.
+### += 연산자가 작동하도록 만드는 특수 메서드는 __iadd__()이다.
+### *= = __imul__()
+### 하지만 메서드가 구현되어 있지 않으면, 파이썬은 대신 __add__() 메서드를 호출한다.
+a = 1
+b = 1
+a += b
+print(a) # a 가 list, bytearray, array.array 등 가변 시퀀스인 경우 a의 값이 변경된다.
+
+lst = [1,2,3]
+id(lst)  # same
+lst *= 2
+id(lst)  # same -> 곱셈 연산을 수행한 후 새로운 항목이 추가된 리스트 객체는 기존 객체와 같은 객체다.
+
+tup = (1,2,3)
+id(tup)  # different
+tup *= 2
+id(tup)  # different -> 곱셈 연산을 수행한 후 새로운 튜플 객체가 만들어졌다. I think It's immutable(불변)
+# 불변 시퀀스에 반복적으로 연결 연산을 수행하는 것은 비효율적이다.
