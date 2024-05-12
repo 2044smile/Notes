@@ -56,3 +56,16 @@ print(floats == floats2)  # True
 #### 따라서, 바이트 형식으로 저장된 데이터는 다양한 플랫폼에서 쉽게 공유 및 처리할 수 있다.
 #### 2. 효율성: 바이트 형식으로 데이터를 저장하면, 데이터 크기를 줄일 수 있으며, 처리 속도도 빠르다.
 #### 3. 간결성: 바이트 형식으로 데이터를 저장하면, 데이터를 저장하는데 필요한 저장 공간이 줄어들고, 데이터 전송 또한 빠르게 이루어진다.
+
+## 2-21 배열 항목 값의 바이트 중 하나를 변경하기
+import array
+
+
+numbers = array.array('h', [-2, -1, 0, 1, 2])  # 'h' = int(짧은 정수)
+memv = memoryview(numbers)  # numbers 를 가지고 memoryview 생성
+len(memv)  # 5 -> 값 보존
+print(memv[0])  # -2 -> 값 보존
+memv_oct = memv.cast('B')  # 'B' = char 형 변환
+memv_oct.tolist()  # [254, 255, 255, 255, 0, 0, 1, 0, 2, 0]
+memv_oct[5] = 4
+print(numbers)  # array('h', [-2, -1, 1024, 1, 2]) 1024
