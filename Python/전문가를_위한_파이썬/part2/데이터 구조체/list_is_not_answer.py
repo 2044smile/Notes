@@ -72,3 +72,20 @@ memv_oct = memv.cast('B')  # 'B' = char 형 변환
 memv_oct.tolist()  # [254, 255, 255, 255, 0, 0, 1, 0, 2, 0]
 memv_oct[5] = 4
 print(numbers)  # array('h', [-2, -1, 1024, 1, 2]) 1024
+
+# 2.9.4 덱 및 기타 큐
+## 리스트를 스택이나 큐(append() and pop() 을 사용하면 FIFO 방식으로 작동한다.)
+##* 덱(collections.deque) 클래스는 큐의 양쪽 어디에서든 빠르게 삽입 및 삭제할 수 있도록 설계된 스레드 안전한 양방향 큐다
+from collections import deque
+
+
+dp = deque(range(10), maxlen=10)
+print(dp)  # deque([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], maxlen=10)
+dp.rotate(3)  # deque([7, 8, 9, 0, 1, 2, 3, 4, 5, 6], maxlen=10) 
+dp.rotate(-4) # deque([1, 2, 3, 4, 5, 6, 7, 8, 9, 0], maxlen=10)
+# rotate() 메서든는 양수 인수를 받으면 오른쪽 끝에 있는 항목을 지정한 개수만큼 왼쪽(오른쪽으로 이동) 끝으로, 
+# 음수 인수를 받으면 왼쪽 끝에 있는 항목을 지정한 개수만큼 오른쪽(왼쪽으로 이동) 끝으로 이동한다.
+#* 결론 양수(3) 은 전체가 3칸 오른쪽으로 이동, 음수(3) 은 전체가 3칸 왼쪽으로 이동
+dp.appendleft(999)  # deque([999, 1, 2, 3, 4, 5, 6, 7, 8, 9], maxlen=10)
+#* maxlen 을 10으로 유지 했기 떄문에 리스트 맨 마지막 값 제거
+dp.extend([11, 22, 33])
