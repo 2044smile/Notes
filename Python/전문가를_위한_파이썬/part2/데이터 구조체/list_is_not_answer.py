@@ -58,6 +58,9 @@ print(floats == floats2)  # True
 #### 3. 간결성: 바이트 형식으로 데이터를 저장하면, 데이터를 저장하는데 필요한 저장 공간이 줄어들고, 데이터 전송 또한 빠르게 이루어진다.
 
 ## 2-21 배열 항목 값의 바이트 중 하나를 변경하기
+### array 모듈과 비슷한 표기법을 사용하는 memoryview.cast() 메서드는 바이트를 이동시키지 않고 C언어의 형변환 연산자처럼 여러 바이트로 된 데이터를 읽거나 쓰는 방식을 바꿀 수 있게 해주고 
+### memoryview.cast()는 또 다른 memoryview 객체를 반환하며 언제나 동일한 메모리를 공유한다.
+### https://velog.io/@qsdcfd/%EB%A6%AC%EC%8A%A4%ED%8A%B8%EA%B0%80-%EB%8B%B5%EC%9D%B4-%EC%95%84%EB%8B%90-%EB%95%8C
 import array
 
 
