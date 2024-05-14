@@ -92,3 +92,23 @@ dp.appendleft(999)  # deque([999, 1, 2, 3, 4, 5, 6, 7, 8, 9], maxlen=10)
 dp.extend([11, 22, 33])  # 추가 왼쪽 999, 0, 1 삭제
 # deque([2, 3, 4, 5, 6, 7, 8, 11, 22, 33], maxlen=10)
 dp.extendleft([11, 22, 33])  # deque([33, 22, 11, 2, 3, 4, 5, 6, 7, 8], maxlen=10)
+
+#* 표준 라이브러리 설명
+## queue
+### queue 모듈에서는 동기화된 (즉, 스레드 안전한) Queue, LifoQueue, PriorityQueue 클래스를 제공한다.
+### 이 클래스들은 스레드 간에 안전하게 통신하기 위해 사용된다.
+### 세 클래스 모두 0보다 큰 maxsize 인수를 생성자에 전달해서 바인딩 할 수 있다.
+###* 그렇지만 덱(deque) 와 달리 공간이 꽉 찼을 때 항목을 버리지 않는다.
+###* 대신 새로운 항목의 추가를 블로킹하고, 다른 스레드에서 큐 안의 항목을 제거해서 공간을 확보해줄 때 까지 기다린다.
+###* 따라서, 활성화 된 스레드 수를 활성화 하기 좋다.
+
+## multiprocessing
+### 멀티프레소싱 모듈은 queue.Queue 와 비슷하지만 프로세스 간 통신을 지원하기 위해 설계된 고유한 Queue 클래스를 구현한다.
+### 태스크 관리에 특화된 multiprocessing.JoinableQueue 클래스도 제공한다.
+
+## asyncio
+### queue 및 multiprocessing 모듈에 포함된 클래스로 부터 영감을 얻은 Queue, LifoQueue, PriorityQueue, JoinableQueue 클래스를 제공하지만,
+###* `비동기 프로그래밍` 환경에서 작업을 관리하는 데 주안점을 두고 있다.
+
+## heapq
+### queue 클래스를 구현하지는 않지만, 가변 시퀀스를 힙 큐나 우선순위 큐로 사용할 수 있게 해주는 heappush() and heappop() 등의 함수를 제공한다.
