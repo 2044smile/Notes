@@ -118,8 +118,10 @@ dp.extendleft([11, 22, 33])  # deque([33, 22, 11, 2, 3, 4, 5, 6, 7, 8], maxlen=1
 ## 파이썬 시퀀스는 가변형과 불변형으로 구분하기도 하지만, 균일 시퀀스와 컨테이너 시퀀스로 분류하는 것도 도움이 된다.
 ##* 컨테이너 시퀀스
 ### 서로 다른 자료형을 담을 수 있으며 list, tuple, collection.deque 형이 이에 속한다.
+### 자기 자신의 자료형 객체를 포함하여 어떤 객체도 담을 수 있으므로 내포된 구조를 가질 수 있다.
 ##* 균일 시퀀스
 ### 단 하나의 자료형만 담을 수 있으며 str, bytes, bytearray, memoryview, array.array 형이 이에 속한다.
+### 정수, 실수, 문자 등 원자성 자료형만 담을 수 있다.
 ##* 가변 시퀀스
 ### list, bytearray, array.array, collections.deque, memoryview 형이 이에 속한다.
 ##* 불변 시퀀스
@@ -148,3 +150,6 @@ dp.extendleft([11, 22, 33])  # deque([33, 22, 11, 2, 3, 4, 5, 6, 7, 8], maxlen=1
 ### 정렬된 시퀀스의 순서를 유지하면서 항목을 추가하려면 bisect.insort() 메서드를 사용하고, 정렬된 시퀀스를 효율적으로 검색하려면 bisect.bisect() 메서드를 사용하라
 
 ## collection.deque 기능이 풍부하고, 스레드 안전한
+
+# 2.11 읽을 거리
+## 
