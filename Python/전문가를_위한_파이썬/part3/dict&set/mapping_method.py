@@ -55,7 +55,7 @@ with open(sys.argv[0], encoding='utf-8') as fp:  # ipython3
             """
             column_no = match.start()+1
             """
-            span=(`3`, 6),   3 + 1 = 4 
+            span=(`3`, 6),   3 + 1 = 4  -> 3이 의미하는 건 인덱스 #!/`u`s`r`/`b`i`n`/`p`ython`3`
             span=(`7`, 10),  7 + 1 = 8
             span=(`11`, 18)  11 + 1 = 12
             """
@@ -74,6 +74,31 @@ with open(sys.argv[0], encoding='utf-8') as fp:  # ipython3
             index[word] = occurrences          # <3>
 
 # print in alphabetical order
-for word in sorted(index, key=str.upper):  # <4>
+for word in sorted(index, key=str.upper):  # <4> str.upper() 를 사용하지 않고, str.upper 를 입력해서 함수에 대한 참조를 전달하면 된다.
+    """
+    0 [(7, 14), (7, 66)]
+    8 [(2, 19)]
+    argv [(7, 9), (7, 61)]
+    bin [(1, 8)]
+    coding [(2, 7)]
+    exe [(7, 44)]
+    exit [(8, 9)]
+    from [(5, 1)]
+    if [(6, 1)]
+    import [(3, 1), (4, 1), (5, 14)]
+    IPython [(5, 6)]
+    python3 [(1, 12)]
+    pyw [(7, 38)]
+    r [(7, 26)]
+    re [(3, 8), (7, 19)]
+    script [(7, 30)]
+    start_ipython [(5, 21), (8, 14)]
+    sub [(7, 22)]
+    sys [(4, 8), (7, 5), (7, 57), (8, 5)]
+    usr [(1, 4)]
+    utf [(2, 15)]
+    __main__ [(6, 17)]
+    __name__ [(6, 4)]
+    """
     print(word, index[word])
 # END INDEX0
