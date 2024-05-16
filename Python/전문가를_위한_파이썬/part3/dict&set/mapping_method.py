@@ -70,17 +70,17 @@ with open(sys.argv[0], encoding='utf-8') as fp:  # ipython3
             """
             # this is ugly; coded like this to make a point
             # Bad case
-            # occurrences = index.get(word, [])  # <1>
-            # occurrences.append(location)       # <2>
-            # index[word] = occurrences          # <3>
-            # Good
+                # occurrences = index.get(word, [])  # <1>
+                # occurrences.append(location)       # <2>
+                # index[word] = occurrences          # <3>
+        # Good
             index.setdefault(word, []).append(location)  # 예제 3-4 occurrences 처리하는 코드 세 줄을 setdefault 를 이용하면 한 줄로 변경 가능
             # 단어에 대한 occurrences 리스트를 가져오거나, 단어가 없을 때는 빈 배열 ([]) 을 가져온다.
             # setdefault() 가 값을 반환하므로 한 번 더 검색할 필요 없이 갱신할 수 있다.
             # Bad case
-            # if key not in my_dict:
-            #     my_dict[key] = []
-            # my_dict[key].append(new_value)
+                # if key not in my_dict:
+                #     my_dict[key] = []
+                # my_dict[key].append(new_value)
 
 # print in alphabetical order
 for word in sorted(index, key=str.upper):  # <4> str.upper() 를 사용하지 않고, str.upper 를 입력해서 함수에 대한 참조를 전달하면 된다.
