@@ -12,3 +12,68 @@
 ## KeyError 를 처리하는 것 보다 기본값을 사용하는 것이 더 편리한 경우에는 d[k] 대신 d.get(k, None) 을 사용한다.
 ### d.get('name', None) -> 'cslee'
 ## 그렇지만 발견한 값을 갱신할 때 해당 객체가 가변 객체면 __getitem__() 이나 get() 메서드는 보기 어색하며, 효율성도 떨어진다.
+# BEGIN INDEX0
+"""Build an index mapping word -> list of occurrences"""
+
+import sys
+import re
+
+WORD_RE = re.compile('\w+')
+
+index = {}
+with open(sys.argv[0], encoding='utf-8') as fp:  # ipython3
+    """
+    #!/usr/bin/python3
+    # -*- coding: utf-8 -*-
+    import re
+    import sys
+    from IPython import start_ipython
+    if __name__ == '__main__':
+        sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+        sys.exit(start_ipython())
+    """
+    for line_no, line in enumerate(fp, 1):
+        for match in WORD_RE.finditer(line):  # finditer 정규식과 매치되는 모든 문자열을 반복 가능한 객체로 돌려준다.
+            """
+            <re.Match object; span=(3, 6), match='usr'>
+            <re.Match object; span=(7, 10), match='bin'>
+            <re.Match object; span=(11, 18), match='python3'>
+            <re.Match object; span=(6, 12), match='coding'>
+            <re.Match object; span=(14, 17), match='utf'>
+            <re.Match object; span=(18, 19), match='8'>
+            <re.Match object; span=(0, 6), match='import'>
+            <re.Match object; span=(7, 9), match='re'>
+            """
+            word = match.group()
+            """
+            usr
+            bin
+            python3
+            coding
+            utf
+            8
+            """
+            column_no = match.start()+1
+            """
+            span=(`3`, 6),   3 + 1 = 4 
+            span=(`7`, 10),  7 + 1 = 8
+            span=(`11`, 18)  11 + 1 = 12
+            """
+            location = (line_no, column_no)
+            """
+            #!/usr/bin/python3
+            (1, 4)  usr
+            (1, 8)  bin
+            (1, 12) python3 
+            (2, 7)  coding
+            (2, 15) utf
+            """
+            # this is ugly; coded like this to make a point
+            occurrences = index.get(word, [])  # <1>
+            occurrences.append(location)       # <2>
+            index[word] = occurrences          # <3>
+
+# print in alphabetical order
+for word in sorted(index, key=str.upper):  # <4>
+    print(word, index[word])
+# END INDEX0
