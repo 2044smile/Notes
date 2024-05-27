@@ -25,3 +25,35 @@ with open(sys.argv[0], encoding='utf-8') as fp:
 # print in alphabetical order
 for word in sorted(index, key=str.upper):
     print(word, index[word])
+
+# 3.4.2 __missing__() 메서드
+## 매핑형은 이름으로도 쉽게 추측할 수 있는 __missing__() 메서드를 이용해서 존재하지 않는 키를 처리한다.
+##* 이 특수 메서드는 기본 클래스인 dict에는 정의되어 있지 않지만, dict는 이 메서드를 알고 있다.
+## 따라서 dict 클래스를 상속하고 __missing__() 메서드를 정의하면, dict.__getitem__() 표준 메서드가 키를 발견할 수 없을 때 KeyError 를 발생시키지 않고, __missing__() 메서드를 호출한다.
+### 간단한 방법은 .get('c', None)
+### simple is best
+dic = {'a':'a', 'b':'b', 'd':'d'}
+dic['c']  # KeyError: 'c'
+
+class Dict(dict):
+    def __missing__(self, name):
+        return "BEEP"
+
+
+target = Dict({'a':'a', 'b':'b', 'd':'d'})
+print(target['c'])  # 'BEEP'
+
+class StrKeyDict0(dict):
+    def __missing__(self, key):
+        if isinstance(key, str):
+            raise KeyError(key)
+        return self[str(key)]
+    
+    def get(self, key, default=None):
+        try:
+            return self[key]
+        except KeyError:
+            return default
+        
+    def __contains__(self, key):
+        return key in self.keys() or str(key) in self.keys()
