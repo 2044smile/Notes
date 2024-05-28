@@ -57,3 +57,5 @@ class StrKeyDict0(dict):
         
     def __contains__(self, key):
         return key in self.keys() or str(key) in self.keys()
+
+target.get('c', None)
