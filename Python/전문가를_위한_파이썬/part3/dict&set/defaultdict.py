@@ -68,7 +68,7 @@ class StrKeyDict0(dict):
             raise KeyError(key)
         return self[str(key)]  # 키에서 문자열을 만들고 조회한다.
     
-    def get(self, key, default=None):  # get() method 는 self[key] 표기법을 이용해서 __getitem__() 메서드에 위임한다. 이렇게 함으로써 __missing__() 메서드가 작동할 수 있는 기회를 준다.
+    def get(self, key, default=None):  # get() method 는 self[key] 표기법을 이용해서 `__getitem__()` 메서드에 위임한다. 이렇게 함으로써 __missing__() 메서드가 작동할 수 있는 기회를 준다.
         try:
             return self[key]
         except KeyError:
@@ -76,6 +76,8 @@ class StrKeyDict0(dict):
         
     def __contains__(self, key):  # 객체가 특정 키를 포함하고 있는지를 확인하는 데 사용 / 이 메서드는 `in` 연산자가 호출될 떄 자동으로 호출
         return key in self.keys() or str(key) in self.keys()  # 수정하지 않은 (문자열이 아닐 수 있는) 키를 검색하고 나서, 키에서 만든 문자열로 검색한다.
+        # 재귀적 호출 문제를 피하기 위해 여기서는 key in self.keys() 와 같이 명시적으로 키를 조회
+        # 아주 큰 매핑의 경우에도 k in dict.keys() 형태의 검색이 효율적이다. dict.keys() 는 집합과 비슷한 뷰를 반환하는데, 집합에 포함되었는지 여부를 검사하는 것은 딕셔너리만큼 빠르기 떄문이다.
 
 
 dic = {"a":"a", "b": "b", "d":"d", "1":"1"}
