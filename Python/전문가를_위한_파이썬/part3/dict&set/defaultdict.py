@@ -87,3 +87,46 @@ d[1]  # KeyError __missing__()
 ## __contains__
 print(1 in d)  # True
 print('1' in d)  # True
+
+# 3.5 그 외 매핑형
+## 표준 라이브러리의 collections 모듈에서 제공하는 여러 매핑형을 간단히 살펴본다.
+
+## collections.OrderedDict
+### 키를 삽입한 순서대로 유지함으로써 항목을 반복하는 순서를 예측할 수 있다.
+### OrderedDict 의 popitem() 메서드는 기본적으로 최근에 삽입한 항목을 꺼내지만, my_odict.popitem(last=True) 형태로 호출하면 처음 삽입한 항목을 꺼낸다.
+from collections import OrderedDict, ChainMap
+
+odict = OrderedDict({"a": "A", "b": "B", "c": "C"})
+print(odict)  # OrderedDict([('a', 'A'), ('b', 'B'), ('c', 'C')])
+odict.popitem()  # ('c', 'C')
+odict.popitem(last=False)  # ('a', 'A')
+
+## collections.ChainMap
+### 매핑들의 목록을 담고 있으며 한꺼번에 모두 검색할 수 있다.
+### 각 매핑을 차례대로 검색하고, 그중 하나에서라도 키가 검색되면 성공한다.
+
+### 업데이트 처리, Multi threading 환경에서 race condition이 발생될 수 있으며, 관리해야 할 객체가 늘어나게 되었다. 또한, 키값이 동일한 경우 값이 덮어쓰기된다.
+d1 = {"A1": 1, "A2": 2, "A3": 3}
+d2 = {"A2": 20, "A4": 40}
+
+combined1 = d1 | d2
+print(combined1)  # {'A1': 1, 'A2': 20, 'A3': 3, 'A4': 40}
+
+### ChainMap은 다수의 dictionary를 비롯한 여러가지 객체를 논리적으로 맵핑 및 그룹화하여 하나로 동작하게 되어 원본 객체 데이터의 view를 생성한다.
+### ChainMap으로 생성한 데이터는 원본데이터를 가지고 신규로 생성한 데이터를 갖는것이 아닌, 원본데이터를 보여줄 수 있도록 참조하는 것이며, 원본데이터가 변경되는 경우 ChainMap 객체에서 표시되는 데이터는 변경된 원본데이터를 계속해서 참조하기 때문에 동일하게 변경되는 것 처럼 보이게 된다.
+### 정의된 dictionary를 통합하여 검색할 수 있으며, 같은 key가 존재하는 경우 `첫번째 mapping list의 객체의 key값이 반환된다.`
+combined2 = ChainMap(d1, d2)
+print(combined2)  # ChainMap({'A1': 1, 'A2': 2, 'A3': 3}, {'A2': 20, 'A4': 40})
+print(combined2['A1'])  # 1
+print(combined2['A2'])  # 2
+
+### 내부적으로 관리되는 mapping 목록을 통해 원본 객체에 접근할 수 있다. 
+combined2.maps[0]  # {'A1': 1, 'A2': 2, 'A3': 3}
+combined2.maps[1]  # {'A2': 20, 'A4': 40}
+print(id(d1))  # 139821075654784 same
+print(id(combined2.maps[0]))  # 139821075654784 same
+print(id(d2))
+print(id(combined2.maps[1]))
+### 키가 겹치지 않는다는 가정의 dict 들에서 합칠 때 용이하다.
+
+
