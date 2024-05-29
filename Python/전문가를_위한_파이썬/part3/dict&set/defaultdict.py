@@ -94,7 +94,7 @@ print('1' in d)  # True
 ## collections.OrderedDict
 ### 키를 삽입한 순서대로 유지함으로써 항목을 반복하는 순서를 예측할 수 있다.
 ### OrderedDict 의 popitem() 메서드는 기본적으로 최근에 삽입한 항목을 꺼내지만, my_odict.popitem(last=True) 형태로 호출하면 처음 삽입한 항목을 꺼낸다.
-from collections import OrderedDict, ChainMap
+from collections import OrderedDict, ChainMap, Counter
 
 odict = OrderedDict({"a": "A", "b": "B", "c": "C"})
 print(odict)  # OrderedDict([('a', 'A'), ('b', 'B'), ('c', 'C')])
@@ -129,4 +129,9 @@ print(id(d2))
 print(id(combined2.maps[1]))
 ### 키가 겹치지 않는다는 가정의 dict 들에서 합칠 때 용이하다.
 
-
+## collections.Counter
+ct = Counter('akdjflkasjv')
+print(ct)  # Counter({'a': 2, 'k': 2, 'j': 2, 'd': 1, 'f': 1, 'l': 1, 's': 1, 'v': 1})
+ct.update('aaaaaaaavvvvvvvv')
+print(ct)  # {'a': 10, 'v': 9, 'k': 2, 'j': 2, 'd': 1, 'f': 1, 'l': 1, 's': 1}
+ct.most_common(2)  # [('a', 10), ('v', 9)]
