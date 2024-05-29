@@ -59,3 +59,29 @@ class StrKeyDict0(dict):
         return key in self.keys() or str(key) in self.keys()
 
 target.get('c', None)
+
+# 3.7 조회할 때 키를 문자열로 변환하는 StrKeyDict()
+## StrKeyDict0 클래스는 키를 숫자 또는 문자열로 저장하고 검색할 수 있도록 유연하게 처리합니다.
+class StrKeyDict0(dict):
+    def __missing__(self, key):
+        if isinstance(key, str):  # 키가 문자열인지 확인한다. 키가 문자열이고 존재하지 않으면 KeyError 가 발생한다.
+            raise KeyError(key)
+        return self[str(key)]  # 키에서 문자열을 만들고 조회한다.
+    
+    def get(self, key, default=None):  # get() method 는 self[key] 표기법을 이용해서 __getitem__() 메서드에 위임한다. 이렇게 함으로써 __missing__() 메서드가 작동할 수 있는 기회를 준다.
+        try:
+            return self[key]
+        except KeyError:
+            return default
+        
+    def __contains__(self, key):  # 객체가 특정 키를 포함하고 있는지를 확인하는 데 사용 / 이 메서드는 `in` 연산자가 호출될 떄 자동으로 호출
+        return key in self.keys() or str(key) in self.keys()  # 수정하지 않은 (문자열이 아닐 수 있는) 키를 검색하고 나서, 키에서 만든 문자열로 검색한다.
+
+
+dic = {"a":"a", "b": "b", "d":"d", "1":"1"}
+d = StrKeyDict0(dic)
+d["a"]  # 'a'
+d[1]  # KeyError __missing__()
+## __contains__
+print(1 in d)  # True
+print('1' in d)  # True
