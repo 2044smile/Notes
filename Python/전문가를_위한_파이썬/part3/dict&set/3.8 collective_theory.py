@@ -51,4 +51,6 @@ dis('set({1})')  # 생성자 set([1]) 에 대한 바이트코드로 디스어셈
 
 ## fronzenset에 대한 별도의 리터럴 구문은 없으며, frozenset은 언제나 `생성자를 호출`해서 생성해야 한다
 
-
+# 3.8.2 지능형 집합(set comprehension)
+from unicodedata import name
+print({chr(i) for i in range(32, 256) if 'SIGN' in name(chr(i), '')})
