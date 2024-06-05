@@ -13,3 +13,20 @@ list(set(l))  # ['eggs', 'spam']
 ### `list` 특히 `array list` 쓰는 것을 추천한다.
 ## `set` 의 경우 전체를 한번씩 확인을 해야 한다 그래서 overhead 가 발생한다. 즉 iteration(반복) 이 느리다.
 ### 메모리 사용 비용 증가
+
+## set 은 기본적인 집합 연산을 구현한다.
+### | 합집합, & 교집합, - 차집합
+a = set([1,2,3])
+b = set([3,4,5])
+
+### 합집합
+print(a | b)  # 1,2,3,4,5
+print(len(a | b))  # 5
+
+### 교집합
+print(a & b)  # 3
+print(len(a & b))  # 1
+
+### 차집합
+print(a - b)  # 1, 2
+print(b - a)  # 4, 5
